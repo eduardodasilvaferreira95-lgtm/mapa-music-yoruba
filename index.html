@@ -1,143 +1,301 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mapa Musical dos Povos Iorubás</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-crossorigin=""/>
+<title>
+Mapa Musical dos Povos Iorubás
+</title>
+
+
+<!-- =====================================================
+     LEAFLET - MAPA
+===================================================== -->
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+>
+
 
 <style>
+
+/* =====================================================
+   CONFIGURAÇÕES GERAIS
+===================================================== */
 
 * {
     box-sizing: border-box;
 }
 
+
 body {
+
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background: #f2eadc;
+
     color: #2b2118;
+
 }
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
 
 header {
+
     background: #2b2118;
+
     color: white;
+
     padding: 25px 20px;
+
     text-align: center;
+
 }
+
 
 header h1 {
+
     margin: 0 0 8px;
-    font-size: clamp(24px, 4vw, 38px);
+
+    font-size:
+        clamp(24px, 4vw, 38px);
+
 }
+
 
 header p {
+
     margin: 0 auto;
+
     max-width: 800px;
+
     line-height: 1.5;
-    opacity: .9;
+
+    opacity: 0.9;
+
 }
+
+
+/* =====================================================
+   MAPA
+===================================================== */
 
 #map {
+
     width: 100%;
+
     height: 75vh;
+
     min-height: 500px;
+
 }
+
+
+/* =====================================================
+   TEXTO ABAIXO DO MAPA
+===================================================== */
 
 .info {
+
     max-width: 900px;
+
     margin: auto;
+
     padding: 20px;
+
     line-height: 1.6;
+
 }
+
+
+/* =====================================================
+   JANELA DOS INSTRUMENTOS
+===================================================== */
 
 .popup {
+
     width: 280px;
+
 }
+
 
 .popup img {
+
     width: 100%;
+
     height: 150px;
+
     object-fit: cover;
+
     border-radius: 8px;
+
     margin-bottom: 8px;
+
 }
+
 
 .popup h2 {
-    margin: 4px 0;
+
+    margin:
+        4px 0;
+
 }
+
 
 .popup h3 {
+
     color: #7a481e;
-    margin: 5px 0 10px;
+
+    margin:
+        5px 0 10px;
+
     font-size: 16px;
+
 }
+
 
 .popup p {
+
     line-height: 1.45;
+
 }
+
+
+/* =====================================================
+   PLAYER DE ÁUDIO
+===================================================== */
 
 audio {
+
     width: 100%;
+
+    margin-top: 8px;
+
 }
 
+
+/* =====================================================
+   LEGENDA
+===================================================== */
+
 .legend {
+
     background: white;
+
     padding: 10px 12px;
+
     border-radius: 8px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 1px 6px
+        rgba(0,0,0,.25);
+
     line-height: 1.5;
+
 }
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
 
 @media (max-width: 600px) {
 
     #map {
+
         height: 70vh;
+
         min-height: 450px;
+
     }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
 
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
+
 <header>
 
-<h1>🎵 Mapa Musical dos Povos Iorubás</h1>
+    <h1>
+        🎵 Mapa Musical dos Povos Iorubás
+    </h1>
 
-<p>
-Clique nos pontos do mapa para conhecer instrumentos tradicionais
-e ouvir seus sons.
-</p>
+    <p>
+        Clique nos pontos do mapa para conhecer
+        instrumentos tradicionais e ouvir seus sons.
+    </p>
 
 </header>
 
 
+
+<!-- =====================================================
+     MAPA
+===================================================== -->
+
 <div id="map"></div>
 
 
+
+<!-- =====================================================
+     TEXTO
+===================================================== -->
+
 <div class="info">
 
-<h2>Sobre o mapa</h2>
+    <h2>
+        Sobre o mapa
+    </h2>
 
-<p>
-Este mapa apresenta alguns instrumentos associados às tradições
-musicais iorubás e às regiões historicamente relacionadas a esses povos.
-Clique nos marcadores para conhecer cada instrumento e ouvir o áudio.
-</p>
+    <p>
+
+        Este mapa apresenta alguns instrumentos
+        associados às tradições musicais iorubás
+        e às regiões historicamente relacionadas
+        a esses povos.
+
+        Clique nos marcadores para conhecer
+        cada instrumento e ouvir o áudio.
+
+    </p>
 
 </div>
 
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-crossorigin=""></script>
+
+<!-- =====================================================
+     LEAFLET
+===================================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin="">
+</script>
+
 
 
 <script>
@@ -147,9 +305,13 @@ crossorigin=""></script>
 ===================================================== */
 
 const map = L.map("map").setView(
+
     [7.5, 3.5],
+
     6
+
 );
+
 
 
 /* =====================================================
@@ -157,208 +319,313 @@ const map = L.map("map").setView(
 ===================================================== */
 
 L.tileLayer(
+
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
     {
+
         maxZoom: 19,
 
         attribution:
-        '&copy; OpenStreetMap contributors'
+            '&copy; OpenStreetMap contributors'
+
     }
+
 ).addTo(map);
+
 
 
 /* =====================================================
    INSTRUMENTOS
 
-   OS ÁUDIOS AGORA SÃO .WAV
+   ATENÇÃO:
 
-   Estrutura:
-
-   Audio/
-      dundun.wav
-      bata.wav
-      agogo.wav
-      benim.wav
+   OS ÁUDIOS ESTÃO SENDO CARREGADOS
+   DIRETAMENTE PELO RAW DO GITHUB.
 
 ===================================================== */
 
 const instrumentos = [
 
-    {
-        nome: "Oió",
 
-        instrumento:
-        "Dùndún — tambor falante",
-
-        latitude:
-        8.00,
-
-        longitude:
-        3.55,
-
-        imagem:
-        "imagens/dundun.jpg",
-
-        audio:
-        "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/dundun.wav",
-
-        descricao:
-        "O dùndún é uma família de tambores tradicionalmente utilizada na música iorubá. Alguns desses tambores podem produzir diferentes alturas de som através da pressão exercida sobre suas cordas."
-    },
-
+    /* =================================================
+       DÙNDÚN
+    ================================================= */
 
     {
-        nome: "Ilê-Ifé",
 
-        instrumento:
-        "Bàtá",
-
-        latitude:
-        7.48,
-
-        longitude:
-        4.56,
-
-        imagem:
-        "imagens/bata.jpg",
-
-        audio:
-        "Audio/bata.wav",
-
-        descricao:
-        "Os tambores bàtá possuem grande importância nas tradições musicais e cerimoniais iorubás, formando conjuntos de percussão com diferentes funções rítmicas."
-    },
-
-
-    {
-        nome: "Região iorubá",
-
-        instrumento:
-        "Àgógô",
-
-        latitude:
-        7.10,
-
-        longitude:
-        3.90,
-
-        imagem:
-        "imagens/agogo.jpg",
-
-        audio:
-        "Audio/agogo.wav",
-
-        descricao:
-        "O àgógô é um instrumento de metal formado por uma ou mais campânulas. Seu som pode funcionar como elemento de marcação rítmica dentro de conjuntos musicais."
-    },
-
-
-    {
         nome:
-        "Região do atual Benim",
+            "Oió",
 
         instrumento:
-        "Percussão tradicional",
+            "Dùndún — tambor falante",
 
         latitude:
-        7.20,
+            8.00,
 
         longitude:
-        2.60,
+            3.55,
+
 
         imagem:
-        "imagens/benim.jpg",
+            "imagens/dundun.jpg",
+
 
         audio:
-        "Audio/benim.wav",
+            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/dundun.wav",
+
 
         descricao:
-        "A região do atual Benim possui relações históricas com diferentes povos e tradições da África Ocidental. As fronteiras dos Estados atuais não correspondem necessariamente às áreas culturais históricas."
+
+            "O dùndún é uma família de tambores tradicionalmente utilizada na música iorubá. Alguns desses tambores podem produzir diferentes alturas de som através da pressão exercida sobre suas cordas."
+
+    },
+
+
+    /* =================================================
+       BÀTÁ
+    ================================================= */
+
+    {
+
+        nome:
+            "Ilê-Ifé",
+
+        instrumento:
+            "Bàtá",
+
+        latitude:
+            7.48,
+
+        longitude:
+            4.56,
+
+
+        imagem:
+            "imagens/bata.jpg",
+
+
+        audio:
+            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/bata.wav",
+
+
+        descricao:
+
+            "Os tambores bàtá possuem grande importância nas tradições musicais e cerimoniais iorubás, formando conjuntos de percussão com diferentes funções rítmicas."
+
+    },
+
+
+    /* =================================================
+       ÀGÓGÔ
+    ================================================= */
+
+    {
+
+        nome:
+            "Região iorubá",
+
+        instrumento:
+            "Àgógô",
+
+        latitude:
+            7.10,
+
+        longitude:
+            3.90,
+
+
+        imagem:
+            "imagens/agogo.jpg",
+
+
+        audio:
+            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/agogo.wav",
+
+
+        descricao:
+
+            "O àgógô é um instrumento de metal formado por uma ou mais campânulas. Seu som pode funcionar como elemento de marcação rítmica dentro de conjuntos musicais."
+
+    },
+
+
+    /* =================================================
+       BENIM
+    ================================================= */
+
+    {
+
+        nome:
+            "Região do atual Benim",
+
+        instrumento:
+            "Percussão tradicional",
+
+        latitude:
+            7.20,
+
+        longitude:
+            2.60,
+
+
+        imagem:
+            "imagens/benim.jpg",
+
+
+        audio:
+            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/benim.wav",
+
+
+        descricao:
+
+            "A região do atual Benim possui relações históricas com diferentes povos e tradições da África Ocidental. As fronteiras dos Estados atuais não correspondem necessariamente às áreas culturais históricas."
+
     }
 
 ];
+
 
 
 /* =====================================================
    CRIAÇÃO DOS MARCADORES
 ===================================================== */
 
-instrumentos.forEach(function(item) {
+instrumentos.forEach(
 
-    const conteudo = `
-
-        <div class="popup">
-
-            <img
-                src="${item.imagem}"
-                alt="${item.instrumento}"
-
-                onerror="
-                this.style.display='none'
-                "
-            >
+    function(item) {
 
 
-            <h2>
-                ${item.nome}
-            </h2>
+        /* =============================================
+           CONTEÚDO DA JANELA
+        ============================================= */
+
+        const conteudo = `
+
+            <div class="popup">
 
 
-            <h3>
-                🥁 ${item.instrumento}
-            </h3>
+                <img
 
+                    src="${item.imagem}"
 
-            <p>
-                ${item.descricao}
-            </p>
+                    alt="${item.instrumento}"
 
+                    onerror="
+                        this.style.display='none'
+                    "
 
-            <strong>
-                🎧 Ouvir o instrumento:
-            </strong>
-
-
-            <br><br>
-
-
-            <audio
-                controls
-                preload="none"
-            >
-
-                <source
-                    src="${item.audio}"
-                    type="audio/wav"
                 >
 
-                Seu navegador não conseguiu
-                carregar o arquivo de áudio.
 
-            </audio>
+                <h2>
 
-        </div>
+                    ${item.nome}
 
-    `;
+                </h2>
 
 
-    L.marker(
-        [
-            item.latitude,
-            item.longitude
-        ]
-    )
+                <h3>
 
-    .addTo(map)
+                    🥁 ${item.instrumento}
 
-    .bindPopup(
-        conteudo,
-        {
-            maxWidth: 320
-        }
-    );
+                </h3>
 
-});
+
+                <p>
+
+                    ${item.descricao}
+
+                </p>
+
+
+                <strong>
+
+                    🎧 Ouvir o instrumento:
+
+                </strong>
+
+
+                <br>
+
+
+                <audio
+
+                    controls
+
+                    preload="metadata"
+
+                >
+
+                    <source
+
+                        src="${item.audio}"
+
+                        type="audio/wav"
+
+                    >
+
+
+                    Seu navegador não suporta
+                    a reprodução deste arquivo WAV.
+
+                </audio>
+
+
+                <br>
+
+
+                <small>
+
+                    Se o áudio não começar,
+                    pressione novamente o botão ▶.
+
+                </small>
+
+
+            </div>
+
+        `;
+
+
+
+        /* =============================================
+           MARCADOR NO MAPA
+        ============================================= */
+
+        L.marker(
+
+            [
+
+                item.latitude,
+
+                item.longitude
+
+            ]
+
+        )
+
+
+        .addTo(map)
+
+
+        .bindPopup(
+
+            conteudo,
+
+            {
+
+                maxWidth: 320
+
+            }
+
+        );
+
+
+    }
+
+);
+
 
 
 /* =====================================================
@@ -389,22 +656,24 @@ L.polygon(
     {
 
         color:
-        "#7a481e",
+            "#7a481e",
 
         weight:
-        2,
+            2,
 
         fillOpacity:
-        0.08,
+            0.08,
 
         dashArray:
-        "7 7"
+            "7 7"
 
     }
 
 )
 
+
 .addTo(map)
+
 
 .bindTooltip(
 
@@ -414,34 +683,39 @@ L.polygon(
 );
 
 
+
 /* =====================================================
    LEGENDA
 ===================================================== */
 
-const legenda =
-L.control({
+const legenda = L.control({
+
     position:
-    "bottomright"
+        "bottomright"
+
 });
 
 
-legenda.onAdd =
-function() {
+legenda.onAdd = function() {
 
-    const div =
-    L.DomUtil.create(
+
+    const div = L.DomUtil.create(
+
         "div",
+
         "legend"
+
     );
 
 
     div.innerHTML = `
 
         <strong>
-        Legenda
+            Legenda
         </strong>
 
         🥁 Instrumento / ponto cultural
+
         <br>
 
         ╌ Área aproximada de referência
@@ -456,8 +730,15 @@ function() {
 
 legenda.addTo(map);
 
+
+
+/* =====================================================
+   FIM
+===================================================== */
+
 </script>
 
 
 </body>
+
 </html>
