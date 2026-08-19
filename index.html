@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mapa Musical Iorubá</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2eadc;
+    color: #2b2118;
+}
+
+header {
+    background: #2b2118;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 8px;
+}
+
+header p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+#map {
+    width: 100%;
+    height: 75vh;
+}
+
+.popup {
+    width: 280px;
+}
+
+.popup img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.popup h2 {
+    margin-bottom: 5px;
+}
+
+.popup h3 {
+    color: #7a481e;
+    margin-top: 5px;
+}
+
+.popup p {
+    line-height: 1.5;
+}
+
+audio {
+    width: 100%;
+}
+
+.info {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🎵 Mapa Musical dos Povos Iorubás</h1>
+
+<p>
+Clique nos pontos do mapa para conhecer instrumentos tradicionais
+e ouvir seus sons.
+</p>
+
+</header>
+
+
+<div id="map"></div>
+
+
+<div class="info">
+
+<h2>Sobre o mapa</h2>
+
+<p>
+Este mapa apresenta alguns instrumentos associados às tradições
+musicais iorubás e às regiões historicamente relacionadas a esses
+povos. Clique nos marcadores para conhecer cada instrumento.
+</p>
+
+</div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* =========================================================
+   CRIAÇÃO DO MAPA
+========================================================= */
+
+const map = L.map("map").setView(
+    [7.5, 3.5],
+    6
+);
+
+
+/* =========================================================
+   MAPA BASE
+========================================================= */
+
+L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+        attribution:
+        '&copy; OpenStreetMap contributors'
+    }
+).addTo(map);
+
+
+/* =========================================================
+   DADOS DOS INSTRUMENTOS
+=========================================================
+
+   Para adicionar seus próprios arquivos:
+
+   imagens/dundun.jpg
+   audio/dundun.mp3
+
+========================================================= */
+
+const instrumentos = [
+
+    {
+        nome: "Oió",
+        instrumento: "Dùndún — tambor falante",
+
+        latitude: 8.0,
+        longitude: 3.55,
+
+        imagem: "imagens/dundun.jpg",
+
+        audio: "audio/dundun.mp3",
+
+        descricao:
+        "O dùndún é uma família de tambores tradicionalmente utilizada na música iorubá. Alguns desses tambores podem produzir diferentes alturas de som através da pressão exercida sobre suas cordas."
+    },
+
+
+    {
+        nome: "Ilê-Ifé",
+        instrumento: "Bàtá",
+
+        latitude: 7.48,
+        longitude: 4.56,
+
+        imagem: "imagens/bata.jpg",
+
+        audio: "audio/bata.mp3",
+
+        descricao:
+        "Os tambores bàtá possuem grande importância nas tradições musicais e cerimoniais iorubás, formando conjuntos de percussão com diferentes funções rítmicas."
+    },
+
+
+    {
+        nome: "Região iorubá",
+        instrumento: "Àgógô",
+
+        latitude: 7.10,
+        longitude: 3.90,
+
+        imagem: "imagens/agogo.jpg",
+
+        audio: "audio/agogo.mp3",
+
+        descricao:
+        "O àgógô é um instrumento de metal formado por uma ou mais campânulas. Seu som pode funcionar como elemento de marcação rítmica dentro de conjuntos musicais."
+    },
+
+
+    {
+        nome: "Região do atual Benim",
+        instrumento: "Percussão tradicional",
+
+        latitude: 7.20,
+        longitude: 2.60,
+
+        imagem: "imagens/benim.jpg",
+
+        audio: "audio/benim.mp3",
+
+        descricao:
+        "A região do atual Benim possui relações históricas com diferentes povos e tradições da África Ocidental. As fronteiras dos Estados atuais não correspondem necessariamente às áreas culturais históricas."
+    }
+
+];
+
+
+/* =========================================================
+   CRIAÇÃO DOS MARCADORES
+========================================================= */
+
+instrumentos.forEach(function(item) {
+
+    const conteudo = `
+
+        <div class="popup">
+
+            <img
+                src="${item.imagem}"
+                alt="${item.instrumento}"
+            >
+
+            <h2>${item.nome}</h2>
+
+            <h3>🥁 ${item.instrumento}</h3>
+
+            <p>
+                ${item.descricao}
+            </p>
+
+            <strong>
+                🎧 Ouvir o instrumento:
+            </strong>
+
+            <br><br>
+
+            <audio controls>
+
+                <source
+                    src="${item.audio}"
+                    type="audio/mpeg"
+                >
+
+                Seu navegador não suporta áudio.
+
+            </audio>
+
+        </div>
+
+    `;
+
+
+    L.marker(
+        [
+            item.latitude,
+            item.longitude
+        ]
+    )
+
+    .addTo(map)
+
+    .bindPopup(
+        conteudo,
+        {
+            maxWidth: 320
+        }
+    );
+
+});
+
+
+/* =========================================================
+   ÁREA APROXIMADA DA REGIÃO HISTÓRICA IORUBÁ
+========================================================= */
+
+const regiaoIoruba = [
+
+    [9.8, 2.0],
+
+    [9.8, 4.9],
+
+    [8.8, 5.5],
+
+    [6.0, 5.5],
+
+    [5.8, 2.2],
+
+    [7.0, 1.8]
+
+];
+
+
+L.polygon(
+    regiaoIoruba,
+    {
+        color: "#7a481e",
+
+        weight: 2,
+
+        fillOpacity: 0.08,
+
+        dashArray: "7 7"
+    }
+)
+
+.addTo(map)
+
+.bindTooltip(
+    "Área aproximada de referência da região histórica iorubá"
+);
+
+
+/* =========================================================
+   LEGENDA
+========================================================= */
+
+const legenda = L.control({
+    position: "bottomright"
+});
+
+
+legenda.onAdd = function() {
+
+    const div = L.DomUtil.create(
+        "div",
+        "info"
+    );
+
+    div.style.background = "white";
+    div.style.padding = "10px";
+    div.style.borderRadius = "8px";
+
+    div.innerHTML = `
+
+        <strong>Legenda</strong><br>
+
+        🥁 Instrumento<br>
+
+        ╌ Região histórica aproximada
+
+    `;
+
+    return div;
+};
+
+
+legenda.addTo(map);
+
+</script>
+
+</body>
+</html>
