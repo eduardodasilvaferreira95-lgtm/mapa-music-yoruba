@@ -32,6 +32,9 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
 body {
 
@@ -42,7 +45,7 @@ body {
         Helvetica,
         sans-serif;
 
-    background: #f2eadc;
+    background: #f3eadb;
 
     color: #2b2118;
 
@@ -55,36 +58,165 @@ body {
 
 header {
 
-    background: #2b2118;
+    background:
+        linear-gradient(
+            135deg,
+            #2b2118,
+            #51321e
+        );
 
     color: white;
 
-    padding: 25px 20px;
+    padding:
+        45px 20px 40px;
 
     text-align: center;
+
+    border-bottom:
+        5px solid #b87935;
 
 }
 
 
 header h1 {
 
-    margin: 0 0 8px;
+    margin: 0 0 12px;
 
     font-size:
-        clamp(24px, 4vw, 38px);
+        clamp(28px, 5vw, 46px);
+
+    letter-spacing:
+        0.5px;
 
 }
 
 
 header p {
 
-    margin: 0 auto;
+    margin: auto;
 
-    max-width: 800px;
+    max-width: 850px;
 
-    line-height: 1.5;
+    font-size:
+        17px;
 
-    opacity: 0.9;
+    line-height:
+        1.7;
+
+    opacity:
+        0.92;
+
+}
+
+
+/* =====================================================
+   INTRODUÇÃO
+===================================================== */
+
+.introducao {
+
+    max-width:
+        1000px;
+
+    margin:
+        30px auto;
+
+    padding:
+        0 20px;
+
+}
+
+
+.introducao-card {
+
+    background:
+        #fffaf2;
+
+    border-radius:
+        16px;
+
+    padding:
+        25px 30px;
+
+    box-shadow:
+        0 4px 18px
+        rgba(43,33,24,0.10);
+
+    border-left:
+        6px solid #9b5f27;
+
+}
+
+
+.introducao-card h2 {
+
+    margin-top: 0;
+
+    color:
+        #6b3e1e;
+
+    font-size:
+        25px;
+
+}
+
+
+.introducao-card p {
+
+    line-height:
+        1.7;
+
+    margin-bottom:
+        0;
+
+}
+
+
+/* =====================================================
+   INSTRUÇÕES
+===================================================== */
+
+.instrucoes {
+
+    max-width:
+        1000px;
+
+    margin:
+        0 auto 20px;
+
+    padding:
+        0 20px;
+
+}
+
+
+.instrucoes-box {
+
+    background:
+        #6b3e1e;
+
+    color:
+        white;
+
+    padding:
+        15px 20px;
+
+    border-radius:
+        12px;
+
+    text-align:
+        center;
+
+    font-size:
+        16px;
+
+}
+
+
+.instrucoes-box strong {
+
+    color:
+        #f4c27a;
 
 }
 
@@ -93,94 +225,230 @@ header p {
    MAPA
 ===================================================== */
 
+.mapa-container {
+
+    max-width:
+        1200px;
+
+    margin:
+        0 auto 35px;
+
+    padding:
+        0 15px;
+
+}
+
+
 #map {
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 75vh;
+    height:
+        70vh;
 
-    min-height: 500px;
+    min-height:
+        500px;
+
+    border-radius:
+        16px;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        0 5px 22px
+        rgba(43,33,24,0.20);
+
+    border:
+        4px solid #fffaf2;
 
 }
 
 
 /* =====================================================
-   TEXTO ABAIXO DO MAPA
+   MARCADORES PERSONALIZADOS
 ===================================================== */
 
-.info {
+.instrument-marker {
 
-    max-width: 900px;
+    width:
+        44px;
 
-    margin: auto;
+    height:
+        44px;
 
-    padding: 20px;
+    border-radius:
+        50%;
 
-    line-height: 1.6;
+    background:
+        #6b3e1e;
+
+    border:
+        3px solid #f4c27a;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        22px;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,0.35);
+
+    transition:
+        transform 0.2s;
+
+}
+
+
+.instrument-marker:hover {
+
+    transform:
+        scale(1.12);
 
 }
 
 
 /* =====================================================
-   JANELA DO INSTRUMENTO
+   POPUP DOS INSTRUMENTOS
 ===================================================== */
 
 .popup {
 
-    width: 280px;
+    width:
+        290px;
 
 }
 
 
 .popup img {
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 150px;
+    height:
+        170px;
 
-    object-fit: cover;
+    object-fit:
+        cover;
 
-    border-radius: 8px;
+    border-radius:
+        10px;
 
-    margin-bottom: 8px;
+    margin-bottom:
+        10px;
+
+    display:
+        block;
 
 }
 
 
 .popup h2 {
 
-    margin: 4px 0;
+    margin:
+        4px 0 2px;
+
+    font-size:
+        22px;
+
+    color:
+        #2b2118;
 
 }
 
 
 .popup h3 {
 
-    color: #7a481e;
+    color:
+        #8a501f;
 
-    margin: 5px 0 10px;
+    margin:
+        4px 0 12px;
 
-    font-size: 16px;
+    font-size:
+        16px;
 
 }
 
 
 .popup p {
 
-    line-height: 1.45;
+    line-height:
+        1.55;
+
+    color:
+        #493a2c;
+
+}
+
+
+.popup strong {
+
+    display:
+        block;
+
+    margin-top:
+        12px;
+
+    color:
+        #6b3e1e;
+
+}
+
+
+.popup audio {
+
+    width:
+        100%;
+
+    margin-top:
+        4px;
 
 }
 
 
 /* =====================================================
-   PLAYER
+   TÍTULO DA REGIÃO
 ===================================================== */
 
-audio {
+.regiao-titulo {
 
-    width: 100%;
+    max-width:
+        1000px;
 
-    margin-top: 8px;
+    margin:
+        0 auto 15px;
+
+    padding:
+        0 20px;
+
+}
+
+
+.regiao-titulo h2 {
+
+    color:
+        #6b3e1e;
+
+    margin-bottom:
+        5px;
+
+}
+
+
+.regiao-titulo p {
+
+    color:
+        #594838;
 
 }
 
@@ -191,17 +459,153 @@ audio {
 
 .legend {
 
-    background: white;
+    background:
+        rgba(255,250,242,0.96);
 
-    padding: 10px 12px;
+    padding:
+        12px 15px;
 
-    border-radius: 8px;
+    border-radius:
+        10px;
 
     box-shadow:
-        0 1px 6px
-        rgba(0,0,0,.25);
+        0 2px 10px
+        rgba(0,0,0,0.25);
 
-    line-height: 1.5;
+    line-height:
+        1.7;
+
+    color:
+        #2b2118;
+
+}
+
+
+.legend-title {
+
+    font-weight:
+        bold;
+
+    color:
+        #6b3e1e;
+
+    margin-bottom:
+        4px;
+
+}
+
+
+/* =====================================================
+   SOBRE
+===================================================== */
+
+.sobre {
+
+    max-width:
+        1000px;
+
+    margin:
+        0 auto 40px;
+
+    padding:
+        0 20px;
+
+}
+
+
+.sobre-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        18px;
+
+}
+
+
+.sobre-card {
+
+    background:
+        #fffaf2;
+
+    border-radius:
+        14px;
+
+    padding:
+        22px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(43,33,24,0.09);
+
+}
+
+
+.sobre-card .icone {
+
+    font-size:
+        30px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.sobre-card h3 {
+
+    margin:
+        5px 0 10px;
+
+    color:
+        #6b3e1e;
+
+}
+
+
+.sobre-card p {
+
+    line-height:
+        1.55;
+
+    margin:
+        0;
+
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+footer {
+
+    background:
+        #2b2118;
+
+    color:
+        white;
+
+    text-align:
+        center;
+
+    padding:
+        25px 20px;
+
+    line-height:
+        1.6;
+
+}
+
+
+footer p {
+
+    margin:
+        4px 0;
 
 }
 
@@ -210,13 +614,54 @@ audio {
    CELULAR
 ===================================================== */
 
+@media (max-width: 800px) {
+
+    .sobre-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
 @media (max-width: 600px) {
+
+    header {
+
+        padding:
+            35px 18px;
+
+    }
+
 
     #map {
 
-        height: 70vh;
+        height:
+            65vh;
 
-        min-height: 450px;
+        min-height:
+            450px;
+
+        border-radius:
+            10px;
+
+    }
+
+
+    .introducao-card {
+
+        padding:
+            20px;
+
+    }
+
+
+    .popup {
+
+        width:
+            250px;
 
     }
 
@@ -242,8 +687,8 @@ audio {
 
     <p>
 
-        Clique nos pontos do mapa para conhecer
-        instrumentos tradicionais e ouvir seus sons.
+        Sons, instrumentos e territórios de uma
+        das principais tradições culturais da África Ocidental.
 
     </p>
 
@@ -252,36 +697,189 @@ audio {
 
 
 <!-- =====================================================
-     MAPA
+     INTRODUÇÃO
 ===================================================== -->
 
-<div id="map"></div>
+<section class="introducao">
+
+    <div class="introducao-card">
+
+        <h2>
+            Música e cultura iorubá
+        </h2>
+
+        <p>
+
+            A música ocupa um papel importante nas
+            sociedades iorubás, estando presente em
+            cerimônias, celebrações, práticas religiosas,
+            acontecimentos políticos e diferentes
+            momentos da vida comunitária.
+
+            Explore o mapa para conhecer alguns dos
+            instrumentos associados a essas tradições.
+
+        </p>
+
+    </div>
+
+</section>
 
 
 
 <!-- =====================================================
-     TEXTO
+     INSTRUÇÕES
 ===================================================== -->
 
-<div class="info">
+<section class="instrucoes">
+
+    <div class="instrucoes-box">
+
+        🗺️ <strong>Explore o mapa:</strong>
+        clique nos símbolos dos instrumentos
+        para conhecer sua história e ouvir seu som.
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAPA
+===================================================== -->
+
+<div class="mapa-container">
+
+    <div id="map"></div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TÍTULO DA REGIÃO
+===================================================== -->
+
+<section class="regiao-titulo">
 
     <h2>
-        Sobre o mapa
+        📍 Região histórica iorubá
     </h2>
 
     <p>
 
-        Este mapa apresenta alguns instrumentos
-        associados às tradições musicais iorubás
-        e às regiões historicamente relacionadas
-        a esses povos.
+        A área destacada representa de maneira
+        aproximada uma região histórica de presença
+        e influência dos povos iorubás.
 
-        Clique nos marcadores para conhecer
-        cada instrumento e ouvir o áudio.
+        As fronteiras atuais dos Estados africanos
+        não correspondem necessariamente aos
+        territórios culturais históricos.
 
     </p>
 
-</div>
+</section>
+
+
+
+<!-- =====================================================
+     SOBRE
+===================================================== -->
+
+<section class="sobre">
+
+    <div class="sobre-grid">
+
+
+        <div class="sobre-card">
+
+            <div class="icone">
+                🥁
+            </div>
+
+            <h3>
+                Instrumentos
+            </h3>
+
+            <p>
+
+                Tambores, sinos, chocalhos e outros
+                instrumentos desempenham diferentes
+                funções dentro das tradições musicais.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="sobre-card">
+
+            <div class="icone">
+                🎧
+            </div>
+
+            <h3>
+                Escute
+            </h3>
+
+            <p>
+
+                Cada ponto do mapa possui um exemplo
+                sonoro. Clique no instrumento e utilize
+                o player para ouvir.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="sobre-card">
+
+            <div class="icone">
+                🌍
+            </div>
+
+            <h3>
+                Território
+            </h3>
+
+            <p>
+
+                O mapa relaciona manifestações musicais
+                a espaços da África Ocidental ligados
+                historicamente às culturas iorubás.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RODAPÉ
+===================================================== -->
+
+<footer>
+
+    <p>
+        <strong>
+            Mapa Musical dos Povos Iorubás
+        </strong>
+    </p>
+
+    <p>
+        Material didático — História e Cultura Africana
+    </p>
+
+</footer>
 
 
 
@@ -322,7 +920,8 @@ L.tileLayer(
 
     {
 
-        maxZoom: 19,
+        maxZoom:
+            19,
 
         attribution:
             '&copy; OpenStreetMap contributors'
@@ -351,6 +950,9 @@ const instrumentos = [
 
         instrumento:
             "Dùndún — tambor falante",
+
+        icone:
+            "🥁",
 
         latitude:
             8.00,
@@ -383,6 +985,9 @@ const instrumentos = [
         instrumento:
             "Bàtá",
 
+        icone:
+            "🥁",
+
         latitude:
             7.48,
 
@@ -413,6 +1018,9 @@ const instrumentos = [
 
         instrumento:
             "Àgógô",
+
+        icone:
+            "🔔",
 
         latitude:
             7.10,
@@ -445,6 +1053,9 @@ const instrumentos = [
         instrumento:
             "Percussão tradicional",
 
+        icone:
+            "🪘",
+
         latitude:
             7.20,
 
@@ -475,6 +1086,9 @@ const instrumentos = [
 
         instrumento:
             "Gàngán — tambor de pressão",
+
+        icone:
+            "🥁",
 
         latitude:
             8.10,
@@ -507,6 +1121,9 @@ const instrumentos = [
         instrumento:
             "Ṣẹ̀kẹ̀rẹ̀ — cabaça de contas",
 
+        icone:
+            "🪇",
+
         latitude:
             7.60,
 
@@ -530,11 +1147,45 @@ const instrumentos = [
 
 
 /* =====================================================
-   MARCADORES
+   CRIAÇÃO DOS MARCADORES
 ===================================================== */
 
 instrumentos.forEach(function(item) {
 
+
+    /* =================================================
+       ÍCONE PERSONALIZADO
+    ================================================= */
+
+    const icone = L.divIcon({
+
+        className:
+            "",
+
+        html:
+
+            `<div class="instrument-marker">
+
+                ${item.icone}
+
+             </div>`,
+
+        iconSize:
+            [44, 44],
+
+        iconAnchor:
+            [22, 22],
+
+        popupAnchor:
+            [0, -22]
+
+    });
+
+
+
+    /* =================================================
+       CONTEÚDO DO POPUP
+    ================================================= */
 
     const conteudo = `
 
@@ -563,7 +1214,8 @@ instrumentos.forEach(function(item) {
 
             <h3>
 
-                🥁 ${item.instrumento}
+                ${item.icone}
+                ${item.instrumento}
 
             </h3>
 
@@ -582,17 +1234,17 @@ instrumentos.forEach(function(item) {
             </strong>
 
 
-            <br>
-
-
             <audio
                 controls
                 preload="none"
             >
 
                 <source
+
                     src="${item.audio}"
+
                     type="audio/mpeg"
+
                 >
 
                 Seu navegador não suporta
@@ -606,6 +1258,11 @@ instrumentos.forEach(function(item) {
     `;
 
 
+
+    /* =================================================
+       MARCADOR
+    ================================================= */
+
     L.marker(
 
         [
@@ -614,7 +1271,14 @@ instrumentos.forEach(function(item) {
 
             item.longitude
 
-        ]
+        ],
+
+        {
+
+            icon:
+                icone
+
+        }
 
     )
 
@@ -626,7 +1290,8 @@ instrumentos.forEach(function(item) {
 
         {
 
-            maxWidth: 320
+            maxWidth:
+                330
 
         }
 
@@ -638,7 +1303,7 @@ instrumentos.forEach(function(item) {
 
 
 /* =====================================================
-   ÁREA APROXIMADA DA REGIÃO HISTÓRICA IORUBÁ
+   REGIÃO HISTÓRICA IORUBÁ
 ===================================================== */
 
 const regiaoIoruba = [
@@ -665,7 +1330,7 @@ L.polygon(
     {
 
         color:
-            "#7a481e",
+            "#9b5f27",
 
         weight:
             2,
@@ -695,37 +1360,50 @@ L.polygon(
    LEGENDA
 ===================================================== */
 
-const legenda = L.control({
+const legenda =
+    L.control({
 
-    position:
-        "bottomright"
+        position:
+            "bottomright"
 
-});
-
-
-legenda.onAdd = function() {
+    });
 
 
-    const div = L.DomUtil.create(
+legenda.onAdd =
+function() {
 
-        "div",
 
-        "legend"
+    const div =
+        L.DomUtil.create(
 
-    );
+            "div",
+
+            "legend"
+
+        );
 
 
     div.innerHTML = `
 
-        <strong>
-            Legenda
-        </strong>
+        <div class="legend-title">
 
-        🥁 Instrumento / ponto cultural
+            🎵 Instrumentos
+
+        </div>
+
+        🥁 Tambores
 
         <br>
 
-        ╌ Área aproximada de referência
+        🔔 Instrumentos metálicos
+
+        <br>
+
+        🪇 Chocalhos
+
+        <br>
+
+        ╌ Região histórica aproximada
 
     `;
 
