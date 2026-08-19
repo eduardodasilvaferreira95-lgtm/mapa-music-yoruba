@@ -8,13 +8,11 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>
-Mapa Musical dos Povos Iorubás
-</title>
+<title>Mapa Musical dos Povos Iorubás</title>
 
 
 <!-- =====================================================
-     LEAFLET - MAPA
+     LEAFLET
 ===================================================== -->
 
 <link
@@ -124,7 +122,7 @@ header p {
 
 
 /* =====================================================
-   JANELA DOS INSTRUMENTOS
+   JANELA DO INSTRUMENTO
 ===================================================== */
 
 .popup {
@@ -151,8 +149,7 @@ header p {
 
 .popup h2 {
 
-    margin:
-        4px 0;
+    margin: 4px 0;
 
 }
 
@@ -161,8 +158,7 @@ header p {
 
     color: #7a481e;
 
-    margin:
-        5px 0 10px;
+    margin: 5px 0 10px;
 
     font-size: 16px;
 
@@ -177,7 +173,7 @@ header p {
 
 
 /* =====================================================
-   PLAYER DE ÁUDIO
+   PLAYER
 ===================================================== */
 
 audio {
@@ -245,8 +241,10 @@ audio {
     </h1>
 
     <p>
+
         Clique nos pontos do mapa para conhecer
         instrumentos tradicionais e ouvir seus sons.
+
     </p>
 
 </header>
@@ -338,10 +336,18 @@ L.tileLayer(
 /* =====================================================
    INSTRUMENTOS
 
-   ATENÇÃO:
+   IMPORTANTE:
 
-   OS ÁUDIOS ESTÃO SENDO CARREGADOS
-   DIRETAMENTE PELO RAW DO GITHUB.
+   Os arquivos precisam estar dentro da pasta:
+
+   Audio/
+
+   E devem possuir exatamente estes nomes:
+
+   dundun.mp3
+   bata.mp3
+   agogo.mp3
+   benim.mp3
 
 ===================================================== */
 
@@ -366,14 +372,11 @@ const instrumentos = [
         longitude:
             3.55,
 
-
         imagem:
             "imagens/dundun.jpg",
 
-
         audio:
-            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/dundun.wav",
-
+            "Audio/dundun.mp3",
 
         descricao:
 
@@ -400,14 +403,11 @@ const instrumentos = [
         longitude:
             4.56,
 
-
         imagem:
             "imagens/bata.jpg",
 
-
         audio:
-            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/bata.wav",
-
+            "Audio/bata.mp3",
 
         descricao:
 
@@ -434,14 +434,11 @@ const instrumentos = [
         longitude:
             3.90,
 
-
         imagem:
             "imagens/agogo.jpg",
 
-
         audio:
-            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/agogo.wav",
-
+            "Audio/agogo.mp3",
 
         descricao:
 
@@ -468,14 +465,11 @@ const instrumentos = [
         longitude:
             2.60,
 
-
         imagem:
             "imagens/benim.jpg",
 
-
         audio:
-            "https://raw.githubusercontent.com/eduardodasilvaferreira95-lgtm/mapa-music-yoruba/main/Audio/benim.wav",
-
+            "Audio/benim.mp3",
 
         descricao:
 
@@ -488,143 +482,110 @@ const instrumentos = [
 
 
 /* =====================================================
-   CRIAÇÃO DOS MARCADORES
+   MARCADORES
 ===================================================== */
 
-instrumentos.forEach(
-
-    function(item) {
+instrumentos.forEach(function(item) {
 
 
-        /* =============================================
-           CONTEÚDO DA JANELA
-        ============================================= */
+    const conteudo = `
 
-        const conteudo = `
-
-            <div class="popup">
+        <div class="popup">
 
 
-                <img
+            <img
 
-                    src="${item.imagem}"
+                src="${item.imagem}"
 
-                    alt="${item.instrumento}"
+                alt="${item.instrumento}"
 
-                    onerror="
-                        this.style.display='none'
-                    "
+                onerror="
+                    this.style.display='none'
+                "
 
+            >
+
+
+            <h2>
+
+                ${item.nome}
+
+            </h2>
+
+
+            <h3>
+
+                🥁 ${item.instrumento}
+
+            </h3>
+
+
+            <p>
+
+                ${item.descricao}
+
+            </p>
+
+
+            <strong>
+
+                🎧 Ouvir o instrumento:
+
+            </strong>
+
+
+            <br>
+
+
+            <audio
+                controls
+                preload="none"
+            >
+
+                <source
+                    src="${item.audio}"
+                    type="audio/mpeg"
                 >
 
+                Seu navegador não suporta
+                reprodução de áudio.
 
-                <h2>
-
-                    ${item.nome}
-
-                </h2>
+            </audio>
 
 
-                <h3>
+        </div>
 
-                    🥁 ${item.instrumento}
-
-                </h3>
+    `;
 
 
-                <p>
+    L.marker(
 
-                    ${item.descricao}
+        [
 
-                </p>
+            item.latitude,
 
+            item.longitude
 
-                <strong>
+        ]
 
-                    🎧 Ouvir o instrumento:
+    )
 
-                </strong>
+    .addTo(map)
 
+    .bindPopup(
 
-                <br>
+        conteudo,
 
+        {
 
-                <audio
+            maxWidth: 320
 
-                    controls
+        }
 
-                    preload="metadata"
-
-                >
-
-                    <source
-
-                        src="${item.audio}"
-
-                        type="audio/wav"
-
-                    >
+    );
 
 
-                    Seu navegador não suporta
-                    a reprodução deste arquivo WAV.
-
-                </audio>
-
-
-                <br>
-
-
-                <small>
-
-                    Se o áudio não começar,
-                    pressione novamente o botão ▶.
-
-                </small>
-
-
-            </div>
-
-        `;
-
-
-
-        /* =============================================
-           MARCADOR NO MAPA
-        ============================================= */
-
-        L.marker(
-
-            [
-
-                item.latitude,
-
-                item.longitude
-
-            ]
-
-        )
-
-
-        .addTo(map)
-
-
-        .bindPopup(
-
-            conteudo,
-
-            {
-
-                maxWidth: 320
-
-            }
-
-        );
-
-
-    }
-
-);
+});
 
 
 
@@ -671,9 +632,7 @@ L.polygon(
 
 )
 
-
 .addTo(map)
-
 
 .bindTooltip(
 
@@ -729,12 +688,6 @@ legenda.onAdd = function() {
 
 
 legenda.addTo(map);
-
-
-
-/* =====================================================
-   FIM
-===================================================== */
 
 </script>
 
