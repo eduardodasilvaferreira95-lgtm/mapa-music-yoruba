@@ -257,15 +257,32 @@ audio {
 
 <div id="map"></div>
 
-      <div style="padding: 20px; background: white; margin: 20px;">
-    <h2>Teste de áudio</h2>
 
-    <p>Ágogo:</p>
+<!-- =====================================================
+     TESTE DE ÁUDIO
+===================================================== -->
+
+<div style="padding: 20px; background: white; margin: 20px;">
+
+    <h2>
+        Teste de áudio
+    </h2>
+
+    <p>
+        Ágogo:
+    </p>
 
     <audio controls>
-        <source src="Audio/agogo.mp3" type="audio/mpeg">
+
+        <source
+            src="Audio/agogo.mp3"
+            type="audio/mpeg"
+        >
+
         Seu navegador não suporta áudio.
+
     </audio>
+
 </div>
 
 
@@ -347,18 +364,9 @@ L.tileLayer(
 /* =====================================================
    INSTRUMENTOS
 
-   IMPORTANTE:
-
-   Os arquivos precisam estar dentro da pasta:
+   Arquivos dentro da pasta:
 
    Audio/
-
-   E devem possuir exatamente estes nomes:
-
-   dundun.mp3
-   bata.mp3
-   agogo.mp3
-   benim.mp3
 
 ===================================================== */
 
@@ -485,6 +493,68 @@ const instrumentos = [
         descricao:
 
             "A região do atual Benim possui relações históricas com diferentes povos e tradições da África Ocidental. As fronteiras dos Estados atuais não correspondem necessariamente às áreas culturais históricas."
+
+    },
+
+
+    /* =================================================
+       GÀNGÁN
+    ================================================= */
+
+    {
+
+        nome:
+            "Oió",
+
+        instrumento:
+            "Gàngán — tambor de pressão",
+
+        latitude:
+            8.10,
+
+        longitude:
+            3.40,
+
+        imagem:
+            "imagens/gangan.jpg",
+
+        audio:
+            "Audio/gangan.mp3",
+
+        descricao:
+
+            "O gàngán é um tambor de pressão tradicional associado à música iorubá. Possui duas membranas ligadas por cordas e pode produzir diferentes alturas através da pressão aplicada às cordas durante a execução."
+
+    },
+
+
+    /* =================================================
+       ṢẸ̀KẸ̀RẸ̀
+    ================================================= */
+
+    {
+
+        nome:
+            "Região iorubá",
+
+        instrumento:
+            "Ṣẹ̀kẹ̀rẹ̀ — cabaça de contas",
+
+        latitude:
+            7.60,
+
+        longitude:
+            4.10,
+
+        imagem:
+            "imagens/sekere.jpg",
+
+        audio:
+            "Audio/sekere.mp3",
+
+        descricao:
+
+            "O ṣẹ̀kẹ̀rẹ̀ é um instrumento de percussão construído a partir de uma cabaça envolvida por uma rede de contas. É utilizado para produzir padrões rítmicos através de movimentos e golpes sobre a cabaça."
 
     }
 
