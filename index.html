@@ -245,6 +245,42 @@ a{color:inherit}
 }
 .reader-btn:hover:not(:disabled){background:var(--gold);color:var(--navy)}
 .reader-btn:disabled{opacity:.35;cursor:not-allowed}
+.reader-btn.expand-btn{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.reader-btn.expand-btn:hover{background:var(--gold-light);border-color:var(--gold-light);}
+.page-count{min-width:150px;text-align:center;color:#ddd7ca;font-size:14px}
+
+/* MODO AMPLIADO — permanece na mesma página */
+.reader-section.pdf-expanded{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    height:100vh;
+    min-height:100vh;
+    overflow:auto;
+    padding:22px 0 28px;
+    background:rgba(6,27,38,.98);
+}
+.reader-section.pdf-expanded .reader-top{
+    margin-bottom:16px;
+}
+.reader-section.pdf-expanded .reader-top .section-intro{
+    max-width:850px;
+}
+.reader-section.pdf-expanded .book{
+    width:min(1500px,96vw);
+    max-width:none;
+}
+.reader-section.pdf-expanded .book-spread{
+    min-height:calc(100vh - 190px);
+}
+.reader-section.pdf-expanded .page{
+    aspect-ratio:auto;
+    min-height:calc(100vh - 190px);
+}
+.reader-section.pdf-expanded .page canvas{
+    object-fit:contain;
+}
+body.pdf-open{overflow:hidden}
 .page-count{min-width:150px;text-align:center;color:#ddd7ca;font-size:14px}
 .pdf-note{
     text-align:center;color:#aaa99e;font-size:12px;margin:18px 0 0
@@ -376,9 +412,10 @@ footer small{opacity:.75}
                     <button class="reader-btn" id="prevBtn" type="button">← Anterior</button>
                     <div class="page-count" id="pageCount">Páginas 1–2 de 19</div>
                     <button class="reader-btn" id="nextBtn" type="button">Próxima →</button>
+                    <button class="reader-btn expand-btn" id="expandBtn" type="button" aria-label="Ampliar apresentação">⛶ Ampliar</button>
                 </div>
                 <p class="pdf-note">O leitor utiliza o PDF original desta apresentação.
-                    <br><a class="pdf-download" href="./Yoruba-Presentation.pdf" target="_blank" rel="noopener">Abrir o PDF completo em outra aba ↗</a>
+                    <br><a class="pdf-download" href="./Yoruba%20Peoples%20Presentation.pdf" target="_blank" rel="noopener">Abrir o PDF completo em outra aba ↗</a>
                 </p>
             </div>
         </div>
@@ -450,7 +487,7 @@ footer small{opacity:.75}
 // =====================================================
 // LEITOR PDF — LIVRO DIGITAL
 // =====================================================
-const PDF_URL = "./Yoruba-Presentation.pdf";
+const PDF_URL = "./Yoruba%20Peoples%20Presentation.pdf";
 const TOTAL_PAGES = 19;
 let currentSpread = 1;
 let pdfDoc = null;
@@ -529,6 +566,32 @@ document.getElementById("nextBtn").addEventListener("click", async () => {
     }
 });
 
+// Ampliar o leitor sem sair da página
+const readerSection = document.querySelector(".reader-section");
+const expandBtn = document.getElementById("expandBtn");
+
+function setPdfExpanded(expanded) {
+    readerSection.classList.toggle("pdf-expanded", expanded);
+    document.body.classList.toggle("pdf-open", expanded);
+    expandBtn.textContent = expanded ? "✕ Fechar" : "⛶ Ampliar";
+    expandBtn.setAttribute("aria-label", expanded ? "Fechar modo ampliado" : "Ampliar apresentação");
+
+    // Dá tempo para o navegador recalcular o tamanho das páginas antes de redesenhar.
+    requestAnimationFrame(() => {
+        if (pdfDoc) renderSpread();
+    });
+}
+
+expandBtn.addEventListener("click", () => {
+    setPdfExpanded(!readerSection.classList.contains("pdf-expanded"));
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && readerSection.classList.contains("pdf-expanded")) {
+        setPdfExpanded(false);
+    }
+});
+
 window.addEventListener("resize", () => {
     if (pdfDoc) renderSpread();
 });
@@ -541,7 +604,7 @@ pdfjsLib.getDocument(PDF_URL).promise
     .catch(error => {
         console.error("Erro ao carregar o PDF:", error);
         document.getElementById("pageLeft").innerHTML =
-            '<div class="page-placeholder">Não foi possível carregar o PDF.<br><small>Verifique se o arquivo está no repositório com o nome <b>Yoruba-Presentation.pdf</b>.</small></div>';
+            '<div class="page-placeholder">Não foi possível carregar o PDF.<br><small>Verifique se o arquivo está no repositório com o nome <b>Yoruba Peoples Presentation.pdf</b>.</small></div>';
         document.getElementById("pageRight").innerHTML =
             '<div class="page-placeholder">Coloque o PDF na mesma pasta do index.html.</div>';
     });
