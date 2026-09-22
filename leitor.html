@@ -34,11 +34,6 @@
             font-family:Arial, Helvetica, sans-serif;
         }
 
-
-        /* =========================
-           CABEÇALHO
-        ========================= */
-
         header{
             background:var(--navy);
             color:white;
@@ -85,17 +80,11 @@
             margin:16px 0 0;
         }
 
-
-        /* =========================
-           CONTAINER
-        ========================= */
-
         .container{
             max-width:1600px;
             margin:auto;
             padding:30px 20px 60px;
         }
-
 
         /* =========================
            ACESSIBILIDADE
@@ -184,9 +173,8 @@
             border-color:var(--gold);
         }
 
-
         /* =========================
-           ÁREA DO PDF
+           PDF
         ========================= */
 
         .pdf-area{
@@ -195,11 +183,6 @@
             padding:20px;
             box-shadow:0 5px 18px rgba(0,0,0,.10);
         }
-
-
-        /* =========================
-           BARRA DO PDF
-        ========================= */
 
         .pdf-toolbar{
             background:var(--navy);
@@ -241,7 +224,6 @@
             font-weight:700;
         }
 
-
         /* =========================
            ZOOM
         ========================= */
@@ -264,52 +246,35 @@
             font-size:13px;
         }
 
-
         /* =========================
-           PÁGINAS DO PDF
+           PÁGINAS
         ========================= */
 
         .pages{
             display:grid;
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-
+            grid-template-columns:repeat(2, minmax(0, 1fr));
             gap:25px;
-
             align-items:start;
-
             width:100%;
         }
 
         .page-wrapper{
             background:white;
-
             padding:10px;
-
-            box-shadow:
-                0 5px 18px rgba(0,0,0,.20);
-
+            box-shadow:0 5px 18px rgba(0,0,0,.20);
             width:100%;
-
             min-height:300px;
-
             display:flex;
-
             justify-content:center;
-
             align-items:flex-start;
-
             overflow-x:auto;
             overflow-y:hidden;
         }
 
         .page-wrapper canvas{
             display:block;
-
             height:auto;
-
             max-width:none;
-
             flex-shrink:0;
         }
 
@@ -319,27 +284,21 @@
             text-align:center;
         }
 
-
         /* =========================
            INFORMAÇÕES
         ========================= */
 
         .info-box{
             margin-top:25px;
-
             background:white;
-
             border:1px solid var(--border);
-
             padding:20px;
-
             line-height:1.65;
         }
 
         .info-box strong{
             color:var(--navy);
         }
-
 
         /* =========================
            TELAS GRANDES
@@ -360,7 +319,6 @@
             }
 
         }
-
 
         /* =========================
            TABLET / NOTEBOOK
@@ -405,7 +363,6 @@
             }
 
         }
-
 
         /* =========================
            CELULAR
@@ -452,13 +409,7 @@
 
 </head>
 
-
 <body>
-
-
-<!-- =========================================================
-     CABEÇALHO
-========================================================= -->
 
 <header>
 
@@ -489,10 +440,7 @@
 
 </header>
 
-
-
 <main class="container">
-
 
     <!-- =====================================================
          ACESSIBILIDADE
@@ -511,7 +459,6 @@
             a leitura.
         </p>
 
-
         <div class="controls">
 
             <button id="speakBtn">
@@ -529,7 +476,6 @@
             <button id="stopBtn" disabled>
                 ⏹ Parar
             </button>
-
 
             <label class="speed-label">
 
@@ -567,7 +513,6 @@
 
         </div>
 
-
         <div
             id="speechStatus"
             class="status"
@@ -579,27 +524,19 @@
 
     </section>
 
-
-
     <!-- =====================================================
          PDF
     ====================================================== -->
 
     <section class="pdf-area">
 
-
         <div class="pdf-toolbar">
-
 
             <div class="pdf-title">
                 📖 Yoruba-Presentation.pdf
             </div>
 
-
             <div class="page-controls">
-
-
-                <!-- ZOOM -->
 
                 <button
                     id="zoomOutBtn"
@@ -609,14 +546,12 @@
                     −
                 </button>
 
-
                 <span
                     id="zoomLevel"
                     class="page-number"
                 >
                     100%
                 </span>
-
 
                 <button
                     id="zoomInBtn"
@@ -626,7 +561,6 @@
                     +
                 </button>
 
-
                 <button
                     id="resetZoomBtn"
                     title="Voltar para 100%"
@@ -635,13 +569,9 @@
                     ↺
                 </button>
 
-
-                <!-- PÁGINAS -->
-
                 <button id="prevBtn">
                     ← Anterior
                 </button>
-
 
                 <span
                     id="pageNumber"
@@ -650,22 +580,15 @@
                     Página 1–2
                 </span>
 
-
                 <button id="nextBtn">
                     Próxima →
                 </button>
-
 
             </div>
 
         </div>
 
-
-
-        <!-- PÁGINAS -->
-
         <div class="pages">
-
 
             <div
                 class="page-wrapper"
@@ -678,7 +601,6 @@
 
             </div>
 
-
             <div
                 class="page-wrapper"
                 id="pageWrapper2"
@@ -690,12 +612,9 @@
 
             </div>
 
-
         </div>
 
     </section>
-
-
 
     <!-- =====================================================
          INFORMAÇÕES
@@ -736,15 +655,12 @@
 
         <br><br>
 
-        O reconhecimento de texto é carregado somente nesta página,
-        mantendo o mapa principal separado do sistema de acessibilidade.
+        O reconhecimento de texto utiliza OCR para interpretar
+        as páginas digitalizadas da apresentação.
 
     </div>
 
-
 </main>
-
-
 
 <!-- =========================================================
      PDF.JS
@@ -752,10 +668,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-
-
 <script>
-
 
 /* =========================================================
    CONFIGURAÇÃO
@@ -766,7 +679,6 @@ const PDF_URL =
 
 const TOTAL_PAGES =
     19;
-
 
 let pdfDocument = null;
 
@@ -807,14 +719,12 @@ const ocrCache =
 let tesseractLoading = null;
 
 
-
 /* =========================================================
    PDF.JS
 ========================================================= */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
 
 
 /* =========================================================
@@ -846,9 +756,6 @@ const nextBtn =
         "nextBtn"
     );
 
-
-/* ZOOM */
-
 const zoomInBtn =
     document.getElementById(
         "zoomInBtn"
@@ -868,9 +775,6 @@ const zoomLevel =
     document.getElementById(
         "zoomLevel"
     );
-
-
-/* LEITURA */
 
 const speakBtn =
     document.getElementById(
@@ -903,7 +807,6 @@ const speechStatus =
     );
 
 
-
 /* =========================================================
    STATUS
 ========================================================= */
@@ -924,9 +827,8 @@ function setSpeechStatus(
 }
 
 
-
 /* =========================================================
-   ATUALIZAR ZOOM
+   ZOOM
 ========================================================= */
 
 function updateZoom(){
@@ -937,7 +839,6 @@ function updateZoom(){
         ) + "%";
 
 }
-
 
 
 /* =========================================================
@@ -953,7 +854,6 @@ async function loadPDF(){
             true
         );
 
-
         pdfDocument =
             await pdfjsLib
                 .getDocument(
@@ -961,22 +861,18 @@ async function loadPDF(){
                 )
                 .promise;
 
-
         await renderSpread();
-
 
         setSpeechStatus(
             "Pronto. Você pode navegar pelas páginas ou iniciar a leitura.",
             false
         );
 
-
     }catch(error){
 
         console.error(
             error
         );
-
 
         setSpeechStatus(
             "Não foi possível carregar o PDF. Verifique se o arquivo 'Yoruba-Presentation.pdf' está na mesma pasta deste leitor.",
@@ -986,7 +882,6 @@ async function loadPDF(){
     }
 
 }
-
 
 
 /* =========================================================
@@ -1000,7 +895,6 @@ async function renderPage(
 
     wrapper.innerHTML = "";
 
-
     if(
         pageNumberValue < 1 ||
         pageNumberValue > TOTAL_PAGES
@@ -1013,7 +907,6 @@ async function renderPage(
 
     }
 
-
     try{
 
         const page =
@@ -1021,16 +914,10 @@ async function renderPage(
                 pageNumberValue
             );
 
-
         const viewport =
             page.getViewport({
                 scale:1
             });
-
-
-        /*
-         * Descobre a largura disponível.
-         */
 
         const containerWidth =
             Math.max(
@@ -1038,72 +925,52 @@ async function renderPage(
                 300
             );
 
-
-        /*
-         * Calcula o tamanho normal.
-         */
-
         const baseScale =
             containerWidth /
             viewport.width;
 
-
-        /*
-         * Aplica o zoom.
-         */
-
         const scale =
             baseScale *
             pdfZoom;
-
 
         const scaledViewport =
             page.getViewport({
                 scale:scale
             });
 
-
         const canvas =
             document.createElement(
                 "canvas"
             );
-
 
         const context =
             canvas.getContext(
                 "2d"
             );
 
-
         canvas.width =
             Math.floor(
                 scaledViewport.width
             );
-
 
         canvas.height =
             Math.floor(
                 scaledViewport.height
             );
 
-
         canvas.style.width =
             scaledViewport.width +
             "px";
 
-
         canvas.style.height =
             "auto";
-
 
         canvas.style.maxWidth =
             "none";
 
-
         wrapper.appendChild(
             canvas
         );
-
 
         await page.render({
 
@@ -1115,13 +982,11 @@ async function renderPage(
 
         }).promise;
 
-
     }catch(error){
 
         console.error(
             error
         );
-
 
         wrapper.innerHTML =
             '<div class="page-placeholder">Erro ao carregar esta página.</div>';
@@ -1129,7 +994,6 @@ async function renderPage(
     }
 
 }
-
 
 
 /* =========================================================
@@ -1147,21 +1011,16 @@ async function renderSpread(){
 
     }
 
-
     rendering = true;
-
 
     prevBtn.disabled =
         currentSpread <= 1;
 
-
     nextBtn.disabled =
         currentSpread + 1 >= TOTAL_PAGES;
 
-
     const secondPage =
         currentSpread + 1;
-
 
     if(
         secondPage <= TOTAL_PAGES
@@ -1177,7 +1036,6 @@ async function renderSpread(){
 
     }
 
-
     await Promise.all([
 
         renderPage(
@@ -1192,11 +1050,9 @@ async function renderSpread(){
 
     ]);
 
-
     rendering = false;
 
 }
-
 
 
 /* =========================================================
@@ -1215,18 +1071,14 @@ prevBtn.addEventListener(
 
         }
 
-
         stopSpeech();
 
-
         currentSpread -= 2;
-
 
         await renderSpread();
 
     }
 );
-
 
 
 nextBtn.addEventListener(
@@ -1241,18 +1093,14 @@ nextBtn.addEventListener(
 
         }
 
-
         stopSpeech();
 
-
         currentSpread += 2;
-
 
         await renderSpread();
 
     }
 );
-
 
 
 /* =========================================================
@@ -1271,18 +1119,14 @@ zoomInBtn.addEventListener(
 
         }
 
-
         pdfZoom += 0.25;
 
-
         updateZoom();
-
 
         await renderSpread();
 
     }
 );
-
 
 
 /* =========================================================
@@ -1301,18 +1145,14 @@ zoomOutBtn.addEventListener(
 
         }
 
-
         pdfZoom -= 0.25;
 
-
         updateZoom();
-
 
         await renderSpread();
 
     }
 );
-
 
 
 /* =========================================================
@@ -1325,9 +1165,7 @@ resetZoomBtn.addEventListener(
 
         pdfZoom = 1;
 
-
         updateZoom();
-
 
         await renderSpread();
 
@@ -1335,9 +1173,8 @@ resetZoomBtn.addEventListener(
 );
 
 
-
 /* =========================================================
-   TESSERACT
+   CARREGAR TESSERACT
 ========================================================= */
 
 function loadTesseract(){
@@ -1352,7 +1189,6 @@ function loadTesseract(){
 
     }
 
-
     if(
         tesseractLoading
     ){
@@ -1360,7 +1196,6 @@ function loadTesseract(){
         return tesseractLoading;
 
     }
-
 
     tesseractLoading =
         new Promise(
@@ -1374,13 +1209,10 @@ function loadTesseract(){
                         "script"
                     );
 
-
                 script.src =
                     "https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js";
 
-
                 script.async = true;
-
 
                 script.onload =
                     function(){
@@ -1405,7 +1237,6 @@ function loadTesseract(){
 
                     };
 
-
                 script.onerror =
                     function(){
 
@@ -1417,7 +1248,6 @@ function loadTesseract(){
 
                     };
 
-
                 document.head.appendChild(
                     script
                 );
@@ -1425,11 +1255,9 @@ function loadTesseract(){
             }
         );
 
-
     return tesseractLoading;
 
 }
-
 
 
 /* =========================================================
@@ -1446,7 +1274,6 @@ async function initOCR(){
 
     }
 
-
     if(
         ocrInitializing
     ){
@@ -1454,7 +1281,6 @@ async function initOCR(){
         return ocrInitializing;
 
     }
-
 
     ocrInitializing =
         (async function(){
@@ -1464,10 +1290,8 @@ async function initOCR(){
                 true
             );
 
-
             const T =
                 await loadTesseract();
-
 
             ocrWorker =
                 await T.createWorker({
@@ -1488,7 +1312,6 @@ async function initOCR(){
                                         ) * 100
                                     );
 
-
                                 setSpeechStatus(
                                     `Reconhecendo texto: ${percent}%`,
                                     true
@@ -1500,27 +1323,22 @@ async function initOCR(){
 
                 });
 
-
             await ocrWorker
                 .loadLanguage(
                     "por"
                 );
-
 
             await ocrWorker
                 .initialize(
                     "por"
                 );
 
-
             ocrWorkerReady =
                 true;
-
 
             return ocrWorker;
 
         })();
-
 
     try{
 
@@ -1536,9 +1354,8 @@ async function initOCR(){
 }
 
 
-
 /* =========================================================
-   OCR DA PÁGINA
+   OCR DA PÁGINA — MELHORADO
 ========================================================= */
 
 async function recognizePage(
@@ -1557,52 +1374,52 @@ async function recognizePage(
 
     }
 
-
     const worker =
         await initOCR();
 
-
     setSpeechStatus(
-        `Preparando a página ${pageNumberValue} para leitura...`,
+        `Reconhecendo o texto da página ${pageNumberValue}...`,
         true
     );
-
 
     const page =
         await pdfDocument.getPage(
             pageNumberValue
         );
 
+    /*
+     * Renderiza em 3x.
+     * A resolução maior melhora a leitura
+     * de letras pequenas.
+     */
 
     const viewport =
         page.getViewport({
-            scale:2
+            scale:3
         });
-
 
     const canvas =
         document.createElement(
             "canvas"
         );
 
-
     const context =
         canvas.getContext(
-            "2d"
+            "2d",
+            {
+                willReadFrequently:true
+            }
         );
-
 
     canvas.width =
         Math.floor(
             viewport.width
         );
 
-
     canvas.height =
         Math.floor(
             viewport.height
         );
-
 
     await page.render({
 
@@ -1615,22 +1432,148 @@ async function recognizePage(
     }).promise;
 
 
+    /*
+     * =====================================================
+     * TRATAMENTO DA IMAGEM
+     * =====================================================
+     */
+
+    const imageData =
+        context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    const data =
+        imageData.data;
+
+    for(
+        let i = 0;
+        i < data.length;
+        i += 4
+    ){
+
+        const r =
+            data[i];
+
+        const g =
+            data[i + 1];
+
+        const b =
+            data[i + 2];
+
+        let gray =
+            (
+                0.299 * r +
+                0.587 * g +
+                0.114 * b
+            );
+
+        /*
+         * Binarização.
+         *
+         * Deixa texto escuro preto
+         * e fundo claro branco.
+         */
+
+        if(
+            gray < 135
+        ){
+
+            gray = 0;
+
+        }else{
+
+            gray = 255;
+
+        }
+
+        data[i] =
+            gray;
+
+        data[i + 1] =
+            gray;
+
+        data[i + 2] =
+            gray;
+
+    }
+
+    context.putImageData(
+        imageData,
+        0,
+        0
+    );
+
+
+    /*
+     * =====================================================
+     * CONFIGURAÇÃO DO TESSERACT
+     * =====================================================
+     *
+     * PSM 11:
+     * texto esparso.
+     *
+     * É melhor para slides que possuem
+     * títulos, caixas e textos separados.
+     */
+
+    try{
+
+        await worker.setParameters({
+
+            tessedit_pageseg_mode:
+                "11",
+
+            preserve_interword_spaces:
+                "1"
+
+        });
+
+    }catch(error){
+
+        console.warn(
+            "Não foi possível configurar o modo OCR:",
+            error
+        );
+
+    }
+
+
+    /*
+     * =====================================================
+     * RECONHECIMENTO
+     * =====================================================
+     */
+
     const result =
         await worker.recognize(
             canvas
         );
 
-
     let text =
-        result.data.text ||
-        "";
+        result &&
+        result.data &&
+        result.data.text
+            ? result.data.text
+            : "";
 
+
+    /*
+     * Limpa o resultado.
+     */
 
     text =
         cleanOCRText(
             text
         );
 
+
+    /*
+     * Salva no cache.
+     */
 
     ocrCache.set(
         pageNumberValue,
@@ -1643,14 +1586,21 @@ async function recognizePage(
 }
 
 
-
 /* =========================================================
-   LIMPAR OCR
+   LIMPAR TEXTO OCR
 ========================================================= */
 
 function cleanOCRText(
     text
 ){
+
+    if(
+        !text
+    ){
+
+        return "";
+
+    }
 
     return text
 
@@ -1665,19 +1615,51 @@ function cleanOCRText(
         )
 
         .replace(
+            /^[ \t]*$/gm,
+            ""
+        )
+
+        /*
+         * Junta palavras quebradas por hífen
+         * no final da linha.
+         */
+
+        .replace(
+            /([A-Za-zÀ-ÿ])-\s*\n\s*([A-Za-zÀ-ÿ])/g,
+            "$1$2"
+        )
+
+        /*
+         * Remove espaços antes de pontuação.
+         */
+
+        .replace(
+            /\s+([,.!?;:])/g,
+            "$1"
+        )
+
+        /*
+         * Evita excesso de linhas vazias.
+         */
+
+        .replace(
             /\n{3,}/g,
             "\n\n"
         )
 
+        /*
+         * Remove algumas linhas que são apenas
+         * ruído visual reconhecido pelo OCR.
+         */
+
         .replace(
-            /([a-záàâãéêíóôõúç])-\n([a-záàâãéêíóôõúç])/gi,
-            "$1$2"
+            /^\s*[_|~`^]+\s*$/gm,
+            ""
         )
 
         .trim();
 
 }
-
 
 
 /* =========================================================
@@ -1691,14 +1673,11 @@ function splitText(
     const maxLength =
         1400;
 
-
     const chunks =
         [];
 
-
     let remaining =
         text.trim();
-
 
     while(
         remaining.length >
@@ -1710,7 +1689,6 @@ function splitText(
                 ". ",
                 maxLength
             );
-
 
         if(
             cut < 500
@@ -1724,7 +1702,6 @@ function splitText(
 
         }
 
-
         if(
             cut <= 0
         ){
@@ -1734,7 +1711,6 @@ function splitText(
 
         }
 
-
         const chunk =
             remaining
                 .slice(
@@ -1742,7 +1718,6 @@ function splitText(
                     cut + 1
                 )
                 .trim();
-
 
         if(
             chunk
@@ -1754,7 +1729,6 @@ function splitText(
 
         }
 
-
         remaining =
             remaining
                 .slice(
@@ -1763,7 +1737,6 @@ function splitText(
                 .trim();
 
     }
-
 
     if(
         remaining
@@ -1775,11 +1748,9 @@ function splitText(
 
     }
 
-
     return chunks;
 
 }
-
 
 
 /* =========================================================
@@ -1791,7 +1762,6 @@ function getPortugueseVoice(){
     const voices =
         speechSynthesis
             .getVoices();
-
 
     return (
 
@@ -1832,7 +1802,6 @@ speechSynthesis.onvoiceschanged =
     };
 
 
-
 /* =========================================================
    FALAR PRÓXIMO TRECHO
 ========================================================= */
@@ -1849,7 +1818,6 @@ function speakNextChunk(){
             false
         );
 
-
         speakBtn.disabled =
             false;
 
@@ -1862,41 +1830,33 @@ function speakNextChunk(){
         stopBtn.disabled =
             true;
 
-
         return;
 
     }
-
 
     const text =
         speechChunks[
             speechIndex
         ];
 
-
     const utterance =
         new SpeechSynthesisUtterance(
             text
         );
 
-
     utterance.lang =
         "pt-BR";
-
 
     utterance.rate =
         parseFloat(
             speedSelect.value
         );
 
-
     utterance.pitch =
         1;
 
-
     const voice =
         getPortugueseVoice();
-
 
     if(
         voice
@@ -1907,7 +1867,6 @@ function speakNextChunk(){
 
     }
 
-
     utterance.onstart =
         function(){
 
@@ -1916,23 +1875,19 @@ function speakNextChunk(){
                 true
             );
 
-
             pauseBtn.disabled =
                 false;
 
         };
-
 
     utterance.onend =
         function(){
 
             speechIndex++;
 
-
             speakNextChunk();
 
         };
-
 
     utterance.onerror =
         function(event){
@@ -1949,12 +1904,10 @@ function speakNextChunk(){
 
             }
 
-
             setSpeechStatus(
                 "Ocorreu um erro durante a leitura.",
                 true
             );
-
 
             speakBtn.disabled =
                 false;
@@ -1970,13 +1923,11 @@ function speakNextChunk(){
 
         };
 
-
     speechSynthesis.speak(
         utterance
     );
 
 }
-
 
 
 /* =========================================================
@@ -1991,50 +1942,43 @@ speakBtn.addEventListener(
 
             speechSynthesis.cancel();
 
-
             speechChunks =
                 [];
-
 
             speechIndex =
                 0;
 
-
             speakBtn.disabled =
                 true;
-
 
             pauseBtn.disabled =
                 true;
 
-
             resumeBtn.disabled =
                 true;
-
 
             stopBtn.disabled =
                 false;
 
-
             const firstPage =
                 currentSpread;
-
 
             const secondPage =
                 currentSpread + 1;
 
+            /*
+             * PRIMEIRA PÁGINA
+             */
 
             setSpeechStatus(
-                "Iniciando reconhecimento de texto...",
+                `Lendo o conteúdo da página ${firstPage}...`,
                 true
             );
-
 
             const firstText =
                 await recognizePage(
                     firstPage
                 );
-
 
             if(
                 firstText
@@ -2049,17 +1993,24 @@ speakBtn.addEventListener(
 
             }
 
+            /*
+             * SEGUNDA PÁGINA
+             */
 
             if(
                 secondPage <=
                 TOTAL_PAGES
             ){
 
+                setSpeechStatus(
+                    `Lendo o conteúdo da página ${secondPage}...`,
+                    true
+                );
+
                 const secondText =
                     await recognizePage(
                         secondPage
                     );
-
 
                 if(
                     secondText
@@ -2076,6 +2027,9 @@ speakBtn.addEventListener(
 
             }
 
+            /*
+             * NENHUM TEXTO
+             */
 
             if(
                 speechChunks.length === 0
@@ -2086,28 +2040,26 @@ speakBtn.addEventListener(
                     true
                 );
 
-
                 speakBtn.disabled =
                     false;
 
-
                 stopBtn.disabled =
                     true;
-
 
                 return;
 
             }
 
+            /*
+             * COMEÇA A FALAR
+             */
 
             setSpeechStatus(
                 "Texto reconhecido. Iniciando leitura...",
                 true
             );
 
-
             speakNextChunk();
-
 
         }catch(error){
 
@@ -2115,12 +2067,10 @@ speakBtn.addEventListener(
                 error
             );
 
-
             setSpeechStatus(
                 "Não foi possível reconhecer o texto. Verifique sua conexão com a internet e tente novamente.",
                 true
             );
-
 
             speakBtn.disabled =
                 false;
@@ -2138,7 +2088,6 @@ speakBtn.addEventListener(
 
     }
 );
-
 
 
 /* =========================================================
@@ -2156,14 +2105,11 @@ pauseBtn.addEventListener(
 
             speechSynthesis.pause();
 
-
             pauseBtn.disabled =
                 true;
 
-
             resumeBtn.disabled =
                 false;
-
 
             setSpeechStatus(
                 "Leitura pausada.",
@@ -2174,7 +2120,6 @@ pauseBtn.addEventListener(
 
     }
 );
-
 
 
 /* =========================================================
@@ -2191,14 +2136,11 @@ resumeBtn.addEventListener(
 
             speechSynthesis.resume();
 
-
             pauseBtn.disabled =
                 false;
 
-
             resumeBtn.disabled =
                 true;
-
 
             setSpeechStatus(
                 "Leitura retomada.",
@@ -2211,7 +2153,6 @@ resumeBtn.addEventListener(
 );
 
 
-
 /* =========================================================
    PARAR
 ========================================================= */
@@ -2220,26 +2161,20 @@ function stopSpeech(){
 
     speechSynthesis.cancel();
 
-
     speechChunks =
         [];
-
 
     speechIndex =
         0;
 
-
     speakBtn.disabled =
         false;
-
 
     pauseBtn.disabled =
         true;
 
-
     resumeBtn.disabled =
         true;
-
 
     stopBtn.disabled =
         true;
@@ -2253,7 +2188,6 @@ stopBtn.addEventListener(
 
         stopSpeech();
 
-
         setSpeechStatus(
             "Leitura interrompida.",
             false
@@ -2261,7 +2195,6 @@ stopBtn.addEventListener(
 
     }
 );
-
 
 
 /* =========================================================
@@ -2278,24 +2211,19 @@ speedSelect.addEventListener(
 
             speechSynthesis.cancel();
 
-
             setSpeechStatus(
                 "Velocidade alterada. Clique novamente em 'Ler páginas abertas' para continuar.",
                 false
             );
 
-
             speakBtn.disabled =
                 false;
-
 
             pauseBtn.disabled =
                 true;
 
-
             resumeBtn.disabled =
                 true;
-
 
             stopBtn.disabled =
                 true;
@@ -2304,7 +2232,6 @@ speedSelect.addEventListener(
 
     }
 );
-
 
 
 /* =========================================================
@@ -2316,7 +2243,6 @@ window.addEventListener(
     async function(){
 
         speechSynthesis.cancel();
-
 
         if(
             ocrWorker
@@ -2338,7 +2264,6 @@ window.addEventListener(
 
     }
 );
-
 
 
 /* =========================================================
