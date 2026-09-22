@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Leitor da apresentação — Povos Iorubás</title>
+
+    <style>
+        :root{
+            --navy:#111b2e;
+            --navy-2:#18263d;
+            --gold:#c9a45c;
+            --gold-light:#e3c98f;
+            --cream:#f2eadc;
+            --paper:#ffffff;
+            --text:#2b2118;
+            --muted:#756b5e;
+            --border:#d9cdbb;
+            --rust:#9b5439;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            margin:0;
+            background:var(--cream);
+            color:var(--text);
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        header{
+            background:var(--navy);
+            color:white;
+            padding:34px 20px;
+            border-bottom:4px solid var(--gold);
+        }
+
+        .header-inner{
+            max-width:1200px;
+            margin:auto;
+        }
+
+        .back-link{
+            display:inline-block;
+            color:var(--gold-light);
+            text-decoration:none;
+            font-weight:700;
+            margin-bottom:18px;
+        }
+
+        .back-link:hover{
+            text-decoration:underline;
+        }
+
+        .eyebrow{
+            text-transform:uppercase;
+            letter-spacing:2px;
+            font-size:12px;
+            color:var(--gold-light);
+            margin-bottom:10px;
+        }
+
+        header h1{
+            margin:0;
+            font-family:Georgia, "Times New Roman", serif;
+            font-size:clamp(30px, 5vw, 48px);
+            line-height:1.1;
+        }
+
+        header p{
+            max-width:750px;
+            color:#e9e2d6;
+            line-height:1.7;
+            margin:16px 0 0;
+        }
+
+        /* =========================
+           CONTEÚDO
+        ========================= */
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+            padding:30px 20px 60px;
+        }
+
+        /* =========================
+           PAINEL DE ACESSIBILIDADE
+        ========================= */
+
+        .accessibility-panel{
+            background:white;
+            border:1px solid var(--border);
+            border-left:5px solid var(--gold);
+            padding:24px;
+            margin-bottom:30px;
+            box-shadow:0 5px 18px rgba(0,0,0,.06);
+        }
+
+        .accessibility-panel h2{
+            margin:0 0 8px;
+            font-family:Georgia, "Times New Roman", serif;
+            color:var(--navy);
+        }
+
+        .accessibility-panel p{
+            margin:0 0 20px;
+            line-height:1.6;
+            color:var(--muted);
+        }
+
+        .controls{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            align-items:center;
+        }
+
+        button,
+        select{
+            border:1px solid var(--navy);
+            padding:11px 15px;
+            font-size:14px;
+            cursor:pointer;
+            font-family:inherit;
+        }
+
+        button{
+            background:var(--navy);
+            color:white;
+            font-weight:700;
+        }
+
+        button:hover:not(:disabled){
+            background:var(--navy-2);
+            transform:translateY(-1px);
+        }
+
+        button:disabled{
+            opacity:.45;
+            cursor:not-allowed;
+        }
+
+        select{
+            background:white;
+            color:var(--text);
+        }
+
+        .speed-label{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            margin-left:5px;
+            font-size:14px;
+            font-weight:700;
+        }
+
+        .status{
+            margin-top:18px;
+            padding:12px 14px;
+            background:#f7f3eb;
+            border:1px solid var(--border);
+            color:var(--muted);
+            line-height:1.5;
+            min-height:44px;
+        }
+
+        .status.active{
+            color:var(--navy);
+            border-color:var(--gold);
+        }
+
+        /* =========================
+           VISUALIZADOR DO PDF
+        ========================= */
+
+        .pdf-area{
+            background:#cfc8bd;
+            border:1px solid var(--border);
+            padding:25px;
+            box-shadow:0 5px 18px rgba(0,0,0,.08);
+        }
+
+        .pdf-toolbar{
+            background:var(--navy);
+            color:white;
+            padding:14px 16px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:15px;
+            flex-wrap:wrap;
+            margin-bottom:20px;
+        }
+
+        .pdf-title{
+            font-weight:700;
+        }
+
+        .page-controls{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            flex-wrap:wrap;
+        }
+
+        .page-controls button{
+            padding:8px 12px;
+            background:white;
+            color:var(--navy);
+            border-color:white;
+        }
+
+        .page-controls button:hover:not(:disabled){
+            background:var(--gold-light);
+        }
+
+        .page-number{
+            min-width:105px;
+            text-align:center;
+            font-weight:700;
+        }
+
+        .pages{
+            display:grid;
+            grid-template-columns:repeat(2, minmax(0, 1fr));
+            gap:25px;
+            align-items:start;
+        }
+
+        .page-wrapper{
+            background:white;
+            padding:10px;
+            box-shadow:0 4px 12px rgba(0,0,0,.16);
+            min-height:200px;
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+        }
+
+        .page-wrapper canvas{
+            display:block;
+            width:100%;
+            height:auto;
+        }
+
+        .page-placeholder{
+            color:var(--muted);
+            padding:40px 20px;
+            text-align:center;
+        }
+
+        /* =========================
+           INFORMAÇÕES
+        ========================= */
+
+        .info-box{
+            margin-top:25px;
+            background:white;
+            border:1px solid var(--border);
+            padding:20px;
+            line-height:1.65;
+        }
+
+        .info-box strong{
+            color:var(--navy);
+        }
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media(max-width:800px){
+
+            .pages{
+                grid-template-columns:1fr;
+            }
+
+            .pdf-area{
+                padding:12px;
+            }
+
+            .accessibility-panel{
+                padding:18px;
+            }
+
+            .controls{
+                flex-direction:column;
+                align-items:stretch;
+            }
+
+            .controls button,
+            .controls select{
+                width:100%;
+            }
+
+            .speed-label{
+                margin-left:0;
+                justify-content:space-between;
+            }
+
+            .speed-label select{
+                width:auto;
+                flex:1;
+            }
+
+            .pdf-toolbar{
+                align-items:flex-start;
+            }
+        }
+
+        @media(max-width:500px){
+
+            header{
+                padding:25px 16px;
+            }
+
+            .container{
+                padding:20px 12px 40px;
+            }
+
+            .pdf-area{
+                padding:8px;
+            }
+
+            .page-wrapper{
+                padding:5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+
+        <a href="./index.html" class="back-link">
+            ← Voltar para o mapa
+        </a>
+
+        <div class="eyebrow">
+            Apresentação completa · 19 páginas
+        </div>
+
+        <h1>
+            Leitor da apresentação
+        </h1>
+
+        <p>
+            Visualize a apresentação sobre os povos e sociedades iorubás
+            e utilize o leitor de acessibilidade para reconhecer e ouvir
+            o texto das páginas.
+        </p>
+
+    </div>
+</header>
+
+
+<main class="container">
+
+    <!-- =========================
+         ACESSIBILIDADE
+    ========================== -->
+
+    <section class="accessibility-panel">
+
+        <h2>
+            🔊 Leitor de acessibilidade
+        </h2>
+
+        <p>
+            O PDF é composto por páginas digitalizadas. Por isso,
+            o texto é reconhecido por OCR antes de ser lido em voz alta.
+            O reconhecimento acontece somente quando você solicitar a leitura.
+        </p>
+
+        <div class="controls">
+
+            <button id="speakBtn">
+                🔊 Ler páginas abertas
+            </button>
+
+            <button id="pauseBtn" disabled>
+                ⏸ Pausar
+            </button>
+
+            <button id="resumeBtn" disabled>
+                ▶ Continuar
+            </button>
+
+            <button id="stopBtn" disabled>
+                ⏹ Parar
+            </button>
+
+            <label class="speed-label">
+                Velocidade:
+
+                <select id="speedSelect">
+                    <option value="0.7">0.7x</option>
+                    <option value="0.85">0.85x</option>
+                    <option value="1" selected>1x</option>
+                    <option value="1.15">1.15x</option>
+                    <option value="1.3">1.3x</option>
+                    <option value="1.5">1.5x</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div
+            id="speechStatus"
+            class="status"
+            aria-live="polite"
+        >
+            Pronto. Abra uma página e clique em
+            "Ler páginas abertas".
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PDF
+    ========================== -->
+
+    <section class="pdf-area">
+
+        <div class="pdf-toolbar">
+
+            <div class="pdf-title">
+                📖 Yoruba-Presentation.pdf
+            </div>
+
+            <div class="page-controls">
+
+                <button id="prevBtn">
+                    ← Anterior
+                </button>
+
+                <span
+                    id="pageNumber"
+                    class="page-number"
+                >
+                    Página 1–2
+                </span>
+
+                <button id="nextBtn">
+                    Próxima →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="pages">
+
+            <div
+                class="page-wrapper"
+                id="pageWrapper1"
+            >
+                <div class="page-placeholder">
+                    Carregando página...
+                </div>
+            </div>
+
+            <div
+                class="page-wrapper"
+                id="pageWrapper2"
+            >
+                <div class="page-placeholder">
+                    Carregando página...
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="info-box">
+
+        <strong>Como utilizar:</strong>
+
+        <br><br>
+
+        Use os botões <strong>Anterior</strong> e
+        <strong>Próxima</strong> para navegar pela apresentação.
+
+        <br><br>
+
+        O botão <strong>🔊 Ler páginas abertas</strong> reconhece
+        automaticamente o texto das duas páginas atualmente exibidas
+        e inicia a leitura em voz alta.
+
+        <br><br>
+
+        O reconhecimento de texto é carregado somente nesta página,
+        mantendo o mapa principal separado do sistema de acessibilidade.
+
+    </div>
+
+</main>
+
+
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+
+    /* =========================================================
+       CONFIGURAÇÃO
+    ========================================================= */
+
+    const PDF_URL = "./Yoruba-Presentation.pdf";
+
+    const TOTAL_PAGES = 19;
+
+    let pdfDocument = null;
+
+    let currentSpread = 1;
+
+    let rendering = false;
+
+    let speechChunks = [];
+
+    let speechIndex = 0;
+
+    let ocrWorker = null;
+
+    let ocrWorkerReady = false;
+
+    let ocrInitializing = null;
+
+    const ocrCache = new Map();
+
+    let tesseractLoading = null;
+
+
+    /* =========================================================
+       PDF.JS
+    ========================================================= */
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+    /* =========================================================
+       ELEMENTOS
+    ========================================================= */
+
+    const pageWrapper1 =
+        document.getElementById("pageWrapper1");
+
+    const pageWrapper2 =
+        document.getElementById("pageWrapper2");
+
+    const pageNumber =
+        document.getElementById("pageNumber");
+
+    const prevBtn =
+        document.getElementById("prevBtn");
+
+    const nextBtn =
+        document.getElementById("nextBtn");
+
+    const speakBtn =
+        document.getElementById("speakBtn");
+
+    const pauseBtn =
+        document.getElementById("pauseBtn");
+
+    const resumeBtn =
+        document.getElementById("resumeBtn");
+
+    const stopBtn =
+        document.getElementById("stopBtn");
+
+    const speedSelect =
+        document.getElementById("speedSelect");
+
+    const speechStatus =
+        document.getElementById("speechStatus");
+
+
+    /* =========================================================
+       STATUS
+    ========================================================= */
+
+    function setSpeechStatus(message, active = false){
+
+        speechStatus.textContent = message;
+
+        speechStatus.classList.toggle(
+            "active",
+            active
+        );
+    }
+
+
+    /* =========================================================
+       CARREGAR PDF
+    ========================================================= */
+
+    async function loadPDF(){
+
+        try{
+
+            setSpeechStatus(
+                "Carregando a apresentação...",
+                true
+            );
+
+            pdfDocument =
+                await pdfjsLib.getDocument(PDF_URL).promise;
+
+            await renderSpread();
+
+            setSpeechStatus(
+                "Pronto. Você pode navegar pelas páginas ou iniciar a leitura.",
+                false
+            );
+
+        }catch(error){
+
+            console.error(error);
+
+            setSpeechStatus(
+                "Não foi possível carregar o PDF. Verifique se o arquivo 'Yoruba-Presentation.pdf' está na mesma pasta deste leitor.",
+                true
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       RENDERIZAR PÁGINA
+    ========================================================= */
+
+    async function renderPage(pageNumberValue, wrapper){
+
+        wrapper.innerHTML = "";
+
+        if(
+            pageNumberValue < 1 ||
+            pageNumberValue > TOTAL_PAGES
+        ){
+
+            wrapper.innerHTML =
+                '<div class="page-placeholder">Fim da apresentação.</div>';
+
+            return;
+
+        }
+
+
+        try{
+
+            const page =
+                await pdfDocument.getPage(pageNumberValue);
+
+
+            const viewport =
+                page.getViewport({
+                    scale:1
+                });
+
+
+            const containerWidth =
+                Math.max(
+                    wrapper.clientWidth - 20,
+                    300
+                );
+
+
+            const scale =
+                containerWidth / viewport.width;
+
+
+            const scaledViewport =
+                page.getViewport({
+                    scale:scale
+                });
+
+
+            const canvas =
+                document.createElement("canvas");
+
+
+            const context =
+                canvas.getContext("2d");
+
+
+            canvas.width =
+                Math.floor(scaledViewport.width);
+
+            canvas.height =
+                Math.floor(scaledViewport.height);
+
+
+            canvas.style.width =
+                "100%";
+
+            canvas.style.height =
+                "auto";
+
+
+            wrapper.appendChild(canvas);
+
+
+            await page.render({
+                canvasContext:context,
+                viewport:scaledViewport
+            }).promise;
+
+
+        }catch(error){
+
+            console.error(error);
+
+            wrapper.innerHTML =
+                '<div class="page-placeholder">Erro ao carregar esta página.</div>';
+
+        }
+
+    }
+
+
+    /* =========================================================
+       MOSTRAR DUAS PÁGINAS
+    ========================================================= */
+
+    async function renderSpread(){
+
+        if(!pdfDocument || rendering){
+            return;
+        }
+
+        rendering = true;
+
+        prevBtn.disabled =
+            currentSpread <= 1;
+
+        nextBtn.disabled =
+            currentSpread + 1 >= TOTAL_PAGES;
+
+
+        const secondPage =
+            currentSpread + 1;
+
+
+        if(secondPage <= TOTAL_PAGES){
+
+            pageNumber.textContent =
+                `Página ${currentSpread}–${secondPage}`;
+
+        }else{
+
+            pageNumber.textContent =
+                `Página ${currentSpread}`;
+
+        }
+
+
+        await Promise.all([
+
+            renderPage(
+                currentSpread,
+                pageWrapper1
+            ),
+
+            renderPage(
+                secondPage,
+                pageWrapper2
+            )
+
+        ]);
+
+
+        rendering = false;
+
+    }
+
+
+    /* =========================================================
+       NAVEGAÇÃO
+    ========================================================= */
+
+    prevBtn.addEventListener(
+        "click",
+        async function(){
+
+            if(currentSpread <= 1){
+                return;
+            }
+
+            stopSpeech();
+
+            currentSpread -= 2;
+
+            await renderSpread();
+
+        }
+    );
+
+
+    nextBtn.addEventListener(
+        "click",
+        async function(){
+
+            if(currentSpread + 1 >= TOTAL_PAGES){
+                return;
+            }
+
+            stopSpeech();
+
+            currentSpread += 2;
+
+            await renderSpread();
+
+        }
+    );
+
+
+    /* =========================================================
+       CARREGAR TESSERACT SOMENTE QUANDO NECESSÁRIO
+    ========================================================= */
+
+    function loadTesseract(){
+
+        if(window.Tesseract){
+
+            return Promise.resolve(
+                window.Tesseract
+            );
+
+        }
+
+
+        if(tesseractLoading){
+
+            return tesseractLoading;
+
+        }
+
+
+        tesseractLoading =
+            new Promise(function(resolve, reject){
+
+                const script =
+                    document.createElement("script");
+
+
+                script.src =
+                    "https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js";
+
+
+                script.async = true;
+
+
+                script.onload =
+                    function(){
+
+                        if(window.Tesseract){
+
+                            resolve(
+                                window.Tesseract
+                            );
+
+                        }else{
+
+                            reject(
+                                new Error(
+                                    "Tesseract.js não ficou disponível."
+                                )
+                            );
+
+                        }
+
+                    };
+
+
+                script.onerror =
+                    function(){
+
+                        reject(
+                            new Error(
+                                "Não foi possível carregar o sistema de OCR."
+                            )
+                        );
+
+                    };
+
+
+                document.head.appendChild(script);
+
+            });
+
+
+        return tesseractLoading;
+
+    }
+
+
+    /* =========================================================
+       INICIALIZAR OCR
+    ========================================================= */
+
+    async function initOCR(){
+
+        if(ocrWorkerReady){
+
+            return ocrWorker;
+
+        }
+
+
+        if(ocrInitializing){
+
+            return ocrInitializing;
+
+        }
+
+
+        ocrInitializing =
+            (async function(){
+
+                setSpeechStatus(
+                    "Carregando o sistema de reconhecimento de texto...",
+                    true
+                );
+
+
+                const T =
+                    await loadTesseract();
+
+
+                ocrWorker =
+                    await T.createWorker({
+
+                        logger:
+                            function(message){
+
+                                if(
+                                    message.status ===
+                                    "recognizing text"
+                                ){
+
+                                    const percent =
+                                        Math.round(
+                                            (
+                                                message.progress || 0
+                                            ) * 100
+                                        );
+
+
+                                    setSpeechStatus(
+                                        `Reconhecendo texto: ${percent}%`,
+                                        true
+                                    );
+
+                                }
+
+                            }
+
+                    });
+
+
+                await ocrWorker.loadLanguage("por");
+
+                await ocrWorker.initialize("por");
+
+
+                ocrWorkerReady = true;
+
+
+                return ocrWorker;
+
+            })();
+
+
+        try{
+
+            return await ocrInitializing;
+
+        }finally{
+
+            ocrInitializing = null;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       PEGAR TEXTO DE UMA PÁGINA
+    ========================================================= */
+
+    async function recognizePage(pageNumberValue){
+
+        if(
+            ocrCache.has(pageNumberValue)
+        ){
+
+            return ocrCache.get(
+                pageNumberValue
+            );
+
+        }
+
+
+        const worker =
+            await initOCR();
+
+
+        setSpeechStatus(
+            `Preparando a página ${pageNumberValue} para leitura...`,
+            true
+        );
+
+
+        const page =
+            await pdfDocument.getPage(
+                pageNumberValue
+            );
+
+
+        const viewport =
+            page.getViewport({
+                scale:2
+            });
+
+
+        const canvas =
+            document.createElement("canvas");
+
+
+        const context =
+            canvas.getContext("2d");
+
+
+        canvas.width =
+            Math.floor(viewport.width);
+
+        canvas.height =
+            Math.floor(viewport.height);
+
+
+        await page.render({
+
+            canvasContext:context,
+
+            viewport:viewport
+
+        }).promise;
+
+
+        const result =
+            await worker.recognize(canvas);
+
+
+        let text =
+            result.data.text || "";
+
+
+        text =
+            cleanOCRText(text);
+
+
+        ocrCache.set(
+            pageNumberValue,
+            text
+        );
+
+
+        return text;
+
+    }
+
+
+    /* =========================================================
+       LIMPAR TEXTO DO OCR
+    ========================================================= */
+
+    function cleanOCRText(text){
+
+        return text
+
+            .replace(/\r/g, "\n")
+
+            .replace(/[ \t]+/g, " ")
+
+            .replace(/\n{3,}/g, "\n\n")
+
+            .replace(
+                /([a-záàâãéêíóôõúç])-\n([a-záàâãéêíóôõúç])/gi,
+                "$1$2"
+            )
+
+            .trim();
+
+    }
+
+
+    /* =========================================================
+       DIVIDIR TEXTO PARA SPEECH SYNTHESIS
+    ========================================================= */
+
+    function splitText(text){
+
+        const maxLength = 1400;
+
+        const chunks = [];
+
+        let remaining =
+            text.trim();
+
+
+        while(
+            remaining.length > maxLength
+        ){
+
+            let cut =
+                remaining.lastIndexOf(
+                    ". ",
+                    maxLength
+                );
+
+
+            if(cut < 500){
+
+                cut =
+                    remaining.lastIndexOf(
+                        " ",
+                        maxLength
+                    );
+
+            }
+
+
+            if(cut <= 0){
+
+                cut =
+                    maxLength;
+
+            }
+
+
+            const chunk =
+                remaining
+                    .slice(0, cut + 1)
+                    .trim();
+
+
+            if(chunk){
+
+                chunks.push(chunk);
+
+            }
+
+
+            remaining =
+                remaining
+                    .slice(cut + 1)
+                    .trim();
+
+        }
+
+
+        if(remaining){
+
+            chunks.push(remaining);
+
+        }
+
+
+        return chunks;
+
+    }
+
+
+    /* =========================================================
+       ENCONTRAR VOZ EM PORTUGUÊS
+    ========================================================= */
+
+    function getPortugueseVoice(){
+
+        const voices =
+            speechSynthesis.getVoices();
+
+
+        return (
+            voices.find(
+                voice =>
+                    voice.lang
+                        .toLowerCase()
+                        .startsWith("pt-br")
+            )
+            ||
+            voices.find(
+                voice =>
+                    voice.lang
+                        .toLowerCase()
+                        .startsWith("pt")
+            )
+            ||
+            null
+        );
+
+    }
+
+
+    speechSynthesis.onvoiceschanged =
+        function(){
+
+            getPortugueseVoice();
+
+        };
+
+
+    /* =========================================================
+       FALAR PRÓXIMO TRECHO
+    ========================================================= */
+
+    function speakNextChunk(){
+
+        if(
+            speechIndex >= speechChunks.length
+        ){
+
+            setSpeechStatus(
+                "Leitura concluída.",
+                false
+            );
+
+            speakBtn.disabled = false;
+            pauseBtn.disabled = true;
+            resumeBtn.disabled = true;
+            stopBtn.disabled = true;
+
+            return;
+
+        }
+
+
+        const text =
+            speechChunks[speechIndex];
+
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        utterance.lang =
+            "pt-BR";
+
+
+        utterance.rate =
+            parseFloat(
+                speedSelect.value
+            );
+
+
+        utterance.pitch =
+            1;
+
+
+        const voice =
+            getPortugueseVoice();
+
+
+        if(voice){
+
+            utterance.voice =
+                voice;
+
+        }
+
+
+        utterance.onstart =
+            function(){
+
+                setSpeechStatus(
+                    `Lendo trecho ${speechIndex + 1} de ${speechChunks.length}...`,
+                    true
+                );
+
+            };
+
+
+        utterance.onend =
+            function(){
+
+                speechIndex++;
+
+                speakNextChunk();
+
+            };
+
+
+        utterance.onerror =
+            function(event){
+
+                if(
+                    event.error === "canceled" ||
+                    event.error === "interrupted"
+                ){
+
+                    return;
+
+                }
+
+
+                setSpeechStatus(
+                    "Ocorreu um erro durante a leitura.",
+                    true
+                );
+
+                speakBtn.disabled = false;
+                pauseBtn.disabled = true;
+                resumeBtn.disabled = true;
+                stopBtn.disabled = true;
+
+            };
+
+
+        speechSynthesis.speak(
+            utterance
+        );
+
+    }
+
+
+    /* =========================================================
+       LER PÁGINAS ABERTAS
+    ========================================================= */
+
+    speakBtn.addEventListener(
+        "click",
+        async function(){
+
+            try{
+
+                speechSynthesis.cancel();
+
+                speechChunks = [];
+
+                speechIndex = 0;
+
+
+                speakBtn.disabled = true;
+                pauseBtn.disabled = true;
+                resumeBtn.disabled = true;
+                stopBtn.disabled = false;
+
+
+                const firstPage =
+                    currentSpread;
+
+
+                const secondPage =
+                    currentSpread + 1;
+
+
+                setSpeechStatus(
+                    "Iniciando reconhecimento de texto...",
+                    true
+                );
+
+
+                const firstText =
+                    await recognizePage(
+                        firstPage
+                    );
+
+
+                if(firstText){
+
+                    speechChunks =
+                        speechChunks.concat(
+                            splitText(firstText)
+                        );
+
+                }
+
+
+                if(
+                    secondPage <= TOTAL_PAGES
+                ){
+
+                    const secondText =
+                        await recognizePage(
+                            secondPage
+                        );
+
+
+                    if(secondText){
+
+                        speechChunks =
+                            speechChunks.concat(
+                                splitText(secondText)
+                            );
+
+                    }
+
+                }
+
+
+                if(
+                    speechChunks.length === 0
+                ){
+
+                    setSpeechStatus(
+                        "Não foi encontrado texto legível nessas páginas.",
+                        true
+                    );
+
+                    speakBtn.disabled = false;
+                    stopBtn.disabled = true;
+
+                    return;
+
+                }
+
+
+                setSpeechStatus(
+                    "Texto reconhecido. Iniciando leitura...",
+                    true
+                );
+
+
+                speakNextChunk();
+
+
+            }catch(error){
+
+                console.error(error);
+
+                setSpeechStatus(
+                    "Não foi possível reconhecer o texto. Verifique sua conexão com a internet e tente novamente.",
+                    true
+                );
+
+
+                speakBtn.disabled = false;
+                pauseBtn.disabled = true;
+                resumeBtn.disabled = true;
+                stopBtn.disabled = true;
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       PAUSAR
+    ========================================================= */
+
+    pauseBtn.addEventListener(
+        "click",
+        function(){
+
+            if(
+                speechSynthesis.speaking &&
+                !speechSynthesis.paused
+            ){
+
+                speechSynthesis.pause();
+
+                pauseBtn.disabled = true;
+                resumeBtn.disabled = false;
+
+                setSpeechStatus(
+                    "Leitura pausada.",
+                    true
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       CONTINUAR
+    ========================================================= */
+
+    resumeBtn.addEventListener(
+        "click",
+        function(){
+
+            if(
+                speechSynthesis.paused
+            ){
+
+                speechSynthesis.resume();
+
+                pauseBtn.disabled = false;
+                resumeBtn.disabled = true;
+
+                setSpeechStatus(
+                    "Leitura retomada.",
+                    true
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       PARAR
+    ========================================================= */
+
+    function stopSpeech(){
+
+        speechSynthesis.cancel();
+
+        speechChunks = [];
+
+        speechIndex = 0;
+
+        speakBtn.disabled = false;
+        pauseBtn.disabled = true;
+        resumeBtn.disabled = true;
+        stopBtn.disabled = true;
+
+    }
+
+
+    stopBtn.addEventListener(
+        "click",
+        function(){
+
+            stopSpeech();
+
+            setSpeechStatus(
+                "Leitura interrompida.",
+                false
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       VELOCIDADE
+    ========================================================= */
+
+    speedSelect.addEventListener(
+        "change",
+        function(){
+
+            if(
+                speechSynthesis.speaking
+            ){
+
+                speechSynthesis.cancel();
+
+                setSpeechStatus(
+                    "Velocidade alterada. Clique novamente em 'Ler páginas abertas' para continuar.",
+                    false
+                );
+
+                speakBtn.disabled = false;
+                pauseBtn.disabled = true;
+                resumeBtn.disabled = true;
+                stopBtn.disabled = true;
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       LIMPEZA AO SAIR
+    ========================================================= */
+
+    window.addEventListener(
+        "beforeunload",
+        async function(){
+
+            speechSynthesis.cancel();
+
+            if(ocrWorker){
+
+                try{
+
+                    await ocrWorker.terminate();
+
+                }catch(error){
+
+                    console.error(error);
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       INICIAR
+    ========================================================= */
+
+    loadPDF();
+
+</script>
+
+</body>
+</html>
