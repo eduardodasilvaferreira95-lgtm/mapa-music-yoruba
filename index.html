@@ -3,16 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Povos e Sociedades Iorubás — História, Cultura e Música</title>
-<meta name="description" content="Projeto interativo sobre os povos e sociedades iorubás na África Ocidental, com mapa musical e apresentação em formato de livro.">
+
+<meta name="description" content="Projeto interativo sobre os povos e sociedades iorubás na África Ocidental, com mapa musical e apresentação.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 
 <style>
+
 :root{
     --navy:#061b26;
     --navy-2:#0b2935;
@@ -25,66 +29,132 @@
     --muted:#5d625b;
     --shadow:0 18px 45px rgba(7,25,32,.16);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
     font-family:"DM Sans",Arial,sans-serif;
     color:var(--ink);
+
     background:
-        radial-gradient(circle at 10% 10%,rgba(198,146,22,.06),transparent 28%),
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(198,146,22,.06),
+            transparent 28%
+        ),
         var(--cream);
 }
-a{color:inherit}
-.container{width:min(1180px,calc(100% - 32px));margin:auto}
 
-/* CAPA / CABEÇALHO */
+a{
+    color:inherit;
+}
+
+.container{
+    width:min(1180px,calc(100% - 32px));
+    margin:auto;
+}
+
+
+/* =====================================================
+   CAPA / CABEÇALHO
+===================================================== */
+
 .hero{
     min-height:560px;
     position:relative;
     overflow:hidden;
     color:#fff;
+
     background:
-        linear-gradient(90deg,rgba(3,21,29,.96) 0%,rgba(3,21,29,.82) 48%,rgba(3,21,29,.35) 100%),
-        radial-gradient(circle at 78% 25%,rgba(198,146,22,.42),transparent 30%),
+        linear-gradient(
+            90deg,
+            rgba(3,21,29,.96) 0%,
+            rgba(3,21,29,.82) 48%,
+            rgba(3,21,29,.35) 100%
+        ),
+        radial-gradient(
+            circle at 78% 25%,
+            rgba(198,146,22,.42),
+            transparent 30%
+        ),
         var(--navy);
+
     border-bottom:5px solid var(--gold);
 }
-.hero:before,.hero:after{
+
+.hero:before,
+.hero:after{
     content:"";
     position:absolute;
     border:1px solid rgba(198,146,22,.28);
     border-radius:50%;
     pointer-events:none;
 }
-.hero:before{width:520px;height:520px;right:-170px;bottom:-280px}
-.hero:after{width:350px;height:350px;left:-220px;bottom:-220px}
-.hero-inner{position:relative;z-index:1;padding:64px 0 52px}
+
+.hero:before{
+    width:520px;
+    height:520px;
+    right:-170px;
+    bottom:-280px;
+}
+
+.hero:after{
+    width:350px;
+    height:350px;
+    left:-220px;
+    bottom:-220px;
+}
+
+.hero-inner{
+    position:relative;
+    z-index:1;
+    padding:64px 0 52px;
+}
+
 .eyebrow{
     color:var(--gold-light);
     text-transform:uppercase;
     letter-spacing:.18em;
     font-size:13px;
     font-weight:700;
+
     display:flex;
     align-items:center;
     gap:14px;
 }
-.eyebrow:after{content:"";height:2px;width:88px;background:var(--gold)}
+
+.eyebrow:after{
+    content:"";
+    height:2px;
+    width:88px;
+    background:var(--gold);
+}
+
 .hero h1{
     max-width:850px;
     margin:34px 0 20px;
+
     font-family:"Playfair Display",Georgia,serif;
+
     font-size:clamp(42px,7vw,76px);
     line-height:.98;
     letter-spacing:-.035em;
 }
+
 .hero-sub{
     font-size:20px;
     max-width:700px;
     line-height:1.5;
     color:#eee8dc;
 }
+
 .meta{
     margin-top:56px;
     display:grid;
@@ -92,527 +162,983 @@ a{color:inherit}
     max-width:480px;
     color:#f3eee5;
 }
-.meta div{display:flex;gap:12px;align-items:center}
-.meta-icon{
-    width:34px;height:34px;border-radius:50%;
-    display:grid;place-items:center;
-    background:var(--gold);color:var(--navy);font-weight:800;
-}
-.gold-rule{height:2px;width:90px;background:var(--gold);margin:28px 0}
 
-/* SEÇÕES */
-.section{padding:62px 0}
+.meta div{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.meta-icon{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+
+    display:grid;
+    place-items:center;
+
+    background:var(--gold);
+    color:var(--navy);
+    font-weight:800;
+}
+
+.gold-rule{
+    height:2px;
+    width:90px;
+    background:var(--gold);
+    margin:28px 0;
+}
+
+
+/* =====================================================
+   SEÇÕES
+===================================================== */
+
+.section{
+    padding:62px 0;
+}
+
 .section-title{
     margin:0 0 10px;
+
     font-family:"Playfair Display",Georgia,serif;
+
     font-size:clamp(30px,4vw,48px);
+
     color:var(--ink);
 }
+
 .section-kicker{
     color:var(--rust);
+
     text-transform:uppercase;
     letter-spacing:.14em;
+
     font-size:12px;
     font-weight:700;
 }
-.section-intro{max-width:760px;line-height:1.75;color:#45534e}
 
-/* INTRO */
+.section-intro{
+    max-width:760px;
+    line-height:1.75;
+    color:#45534e;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
 .intro-card{
     background:var(--cream-2);
+
     border:1px solid rgba(36,61,58,.1);
     border-left:5px solid var(--gold);
+
     box-shadow:var(--shadow);
+
     padding:30px 34px;
 }
-.intro-card p{line-height:1.8;margin:10px 0 0}
 
-/* MAPA */
+.intro-card p{
+    line-height:1.8;
+    margin:10px 0 0;
+}
+
+
+/* =====================================================
+   MAPA
+===================================================== */
+
 .map-section{
     padding:18px 0 70px;
 }
+
 .map-heading{
-    display:flex;justify-content:space-between;gap:30px;align-items:end;
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    align-items:end;
+
     margin-bottom:18px;
 }
-.map-heading p{max-width:540px;margin:0;line-height:1.6;color:var(--muted)}
+
+.map-heading p{
+    max-width:540px;
+    margin:0;
+    line-height:1.6;
+    color:var(--muted);
+}
+
 .instruction{
     margin:18px 0;
+
     background:var(--navy);
     color:#fff;
+
     padding:15px 20px;
+
     border-left:4px solid var(--gold);
 }
+
 #map{
     width:100%;
     height:68vh;
     min-height:500px;
+
     border:5px solid var(--cream-2);
     border-radius:2px;
+
     box-shadow:var(--shadow);
 }
+
 .instrument-marker{
-    width:44px;height:44px;border-radius:50%;
-    background:var(--navy);border:3px solid var(--gold-light);
-    display:flex;align-items:center;justify-content:center;
-    font-size:22px;box-shadow:0 4px 10px rgba(0,0,0,.35);
+    width:44px;
+    height:44px;
+    border-radius:50%;
+
+    background:var(--navy);
+
+    border:3px solid var(--gold-light);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.35);
+
     transition:.2s;
 }
-.instrument-marker:hover{transform:scale(1.12)}
-.popup{width:290px}
-.popup img{width:100%;height:170px;object-fit:cover;border-radius:3px;margin-bottom:10px;display:block}
-.popup h2{margin:4px 0 2px;font-family:"Playfair Display",Georgia,serif;color:var(--ink);font-size:23px}
-.popup h3{color:var(--rust);margin:4px 0 12px;font-size:16px}
-.popup p{line-height:1.55;color:#493a2c}
-.popup strong{display:block;margin-top:12px;color:var(--ink)}
-.popup audio{width:100%;margin-top:4px}
-.legend{
-    background:rgba(251,247,238,.97);padding:12px 15px;border-radius:2px;
-    box-shadow:0 2px 12px rgba(0,0,0,.25);line-height:1.7;color:var(--ink)
-}
-.legend-title{font-weight:700;color:var(--rust);margin-bottom:4px}
 
-/* LIVRO / PDF */
+.instrument-marker:hover{
+    transform:scale(1.12);
+}
+
+.popup{
+    width:290px;
+}
+
+.popup img{
+    width:100%;
+    height:170px;
+
+    object-fit:cover;
+
+    border-radius:3px;
+
+    margin-bottom:10px;
+
+    display:block;
+}
+
+.popup h2{
+    margin:4px 0 2px;
+
+    font-family:"Playfair Display",Georgia,serif;
+
+    color:var(--ink);
+
+    font-size:23px;
+}
+
+.popup h3{
+    color:var(--rust);
+
+    margin:4px 0 12px;
+
+    font-size:16px;
+}
+
+.popup p{
+    line-height:1.55;
+    color:#493a2c;
+}
+
+.popup strong{
+    display:block;
+    margin-top:12px;
+    color:var(--ink);
+}
+
+.popup audio{
+    width:100%;
+    margin-top:4px;
+}
+
+.legend{
+    background:rgba(251,247,238,.97);
+
+    padding:12px 15px;
+
+    border-radius:2px;
+
+    box-shadow:0 2px 12px rgba(0,0,0,.25);
+
+    line-height:1.7;
+
+    color:var(--ink);
+}
+
+.legend-title{
+    font-weight:700;
+    color:var(--rust);
+    margin-bottom:4px;
+}
+
+
+/* =====================================================
+   SEÇÃO DO PDF / ACESSIBILIDADE
+===================================================== */
+
 .reader-section{
     background:var(--navy);
+
     color:white;
+
     padding:78px 0 88px;
+
     position:relative;
+
     overflow:hidden;
 }
+
 .reader-section:before{
     content:"";
-    position:absolute;inset:0;
-    background:linear-gradient(120deg,transparent 35%,rgba(198,146,22,.06));
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 35%,
+            rgba(198,146,22,.06)
+        );
+
     pointer-events:none;
 }
-.reader-top{position:relative;z-index:1;display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:32px}
-.reader-top .section-title{color:white}
-.reader-top .section-intro{color:#d8d8d0}
+
+.reader-top{
+    position:relative;
+    z-index:1;
+
+    display:flex;
+    justify-content:space-between;
+
+    gap:30px;
+
+    align-items:end;
+
+    margin-bottom:10px;
+}
+
+.reader-top .section-title{
+    color:white;
+}
+
+.reader-top .section-intro{
+    color:#d8d8d0;
+}
+
 .reader-badge{
-    color:var(--gold-light);font-size:12px;font-weight:700;
-    letter-spacing:.15em;text-transform:uppercase;
+    color:var(--gold-light);
+
+    font-size:12px;
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
 }
-.book-wrap{position:relative;z-index:1}
-.book{
-    max-width:1120px;margin:auto;
-    padding:22px;
-    background:#0b2935;
-    border:1px solid rgba(225,185,78,.22);
-    box-shadow:0 25px 60px rgba(0,0,0,.38);
-}
-.book-spread{
-    display:grid;grid-template-columns:1fr 1fr;
-    background:#d8d0bd;
-    gap:2px;
-    position:relative;
-}
-.book-spread:before{
-    content:"";
-    position:absolute;z-index:5;left:50%;top:0;bottom:0;width:2px;
-    background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(255,255,255,.7),rgba(0,0,0,.18));
-    transform:translateX(-1px);
-    pointer-events:none;
-}
-.page{
-    min-width:0;
-    aspect-ratio:16/9;
-    background:#fff;
-    position:relative;
-    overflow:hidden;
-}
-.page canvas{display:block;width:100%;height:100%}
-.page-number{
-    position:absolute;bottom:8px;right:12px;
-    background:rgba(6,27,38,.78);color:#fff;
-    padding:3px 7px;font-size:11px;border-radius:2px;
-}
-.page-placeholder{
-    width:100%;height:100%;display:grid;place-items:center;
-    color:#7d776c;background:#f0eadc;
-    font-family:"Playfair Display",Georgia,serif;font-size:22px;
-}
-.reader-controls{
-    display:flex;align-items:center;justify-content:center;gap:14px;
-    margin-top:24px;flex-wrap:wrap;
-}
-.reader-btn{
+
+
+/* =====================================================
+   BOTÃO PARA O LEITOR DE ACESSIBILIDADE
+===================================================== */
+
+.pdf-accessibility-link{
+    display:inline-block;
+
+    margin-top:22px;
+
+    padding:14px 22px;
+
+    background:var(--gold);
+
+    color:var(--navy);
+
+    text-decoration:none;
+
+    font-weight:700;
+
     border:1px solid var(--gold);
-    background:transparent;color:#fff;
-    padding:11px 18px;cursor:pointer;
-    font:600 14px "DM Sans",sans-serif;
+
     transition:.2s;
 }
-.reader-btn:hover:not(:disabled){background:var(--gold);color:var(--navy)}
-.reader-btn:disabled{opacity:.35;cursor:not-allowed}
-.reader-btn.expand-btn{background:var(--gold);color:var(--navy);border-color:var(--gold);}
-.reader-btn.expand-btn:hover{background:var(--gold-light);border-color:var(--gold-light);}
-.page-count{min-width:150px;text-align:center;color:#ddd7ca;font-size:14px}
 
-/* MODO AMPLIADO — permanece na mesma página */
-.reader-section.pdf-expanded{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    height:100vh;
-    min-height:100vh;
-    overflow:auto;
-    padding:22px 0 28px;
-    background:rgba(6,27,38,.98);
-}
-.reader-section.pdf-expanded .reader-top{
-    margin-bottom:16px;
-}
-.reader-section.pdf-expanded .reader-top .section-intro{
-    max-width:850px;
-}
-.reader-section.pdf-expanded .book{
-    width:min(1500px,96vw);
-    max-width:none;
-}
-.reader-section.pdf-expanded .book-spread{
-    min-height:calc(100vh - 190px);
-}
-.reader-section.pdf-expanded .page{
-    aspect-ratio:auto;
-    min-height:calc(100vh - 190px);
-}
-.reader-section.pdf-expanded .page canvas{
-    object-fit:contain;
-}
-body.pdf-open{overflow:hidden}
-.page-count{min-width:150px;text-align:center;color:#ddd7ca;font-size:14px}
-.pdf-note{
-    text-align:center;color:#aaa99e;font-size:12px;margin:18px 0 0
-}
-.pdf-download{
-    display:inline-block;margin-top:8px;color:var(--gold-light);text-decoration:none;
-}
-.pdf-download:hover{text-decoration:underline}
+.pdf-accessibility-link:hover{
+    background:var(--gold-light);
 
-/* CARDS / CONCLUSÃO */
-.info-section{padding:72px 0}
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    border-color:var(--gold-light);
+
+    transform:translateY(-1px);
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.info-section{
+    padding:72px 0;
+}
+
+.info-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+
+    margin-top:28px;
+}
+
 .info-card{
     background:var(--cream-2);
+
     border-top:3px solid var(--gold);
+
     padding:25px;
-    box-shadow:0 8px 25px rgba(7,25,32,.08);
+
+    box-shadow:
+        0 8px 25px rgba(7,25,32,.08);
 }
-.info-card .icon{font-size:27px;margin-bottom:10px}
-.info-card h3{margin:5px 0 10px;font-family:"Playfair Display",Georgia,serif;font-size:24px}
-.info-card p{margin:0;line-height:1.65;color:#4e5955}
+
+.info-card .icon{
+    font-size:27px;
+    margin-bottom:10px;
+}
+
+.info-card h3{
+    margin:5px 0 10px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:24px;
+}
+
+.info-card p{
+    margin:0;
+
+    line-height:1.65;
+
+    color:#4e5955;
+}
+
+
+/* =====================================================
+   CONCLUSÃO
+===================================================== */
+
 .conclusion{
     background:var(--cream-2);
-    border:1px solid rgba(36,61,58,.1);
+
+    border:
+        1px solid rgba(36,61,58,.1);
+
     padding:38px;
+
     box-shadow:var(--shadow);
 }
-.conclusion p{line-height:1.85;margin:0 0 14px}
-.references{font-size:14px;line-height:1.75;color:#59625e}
-.references strong{color:var(--rust)}
 
-/* FOOTER */
+.conclusion p{
+    line-height:1.85;
+
+    margin:
+        0 0 14px;
+}
+
+
+/* =====================================================
+   REFERÊNCIAS
+===================================================== */
+
+.references{
+    font-size:14px;
+
+    line-height:1.75;
+
+    color:#59625e;
+}
+
+.references strong{
+    color:var(--rust);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
 footer{
-    background:var(--navy);color:#ddd7ca;
-    text-align:center;padding:32px 20px;
+    background:var(--navy);
+
+    color:#ddd7ca;
+
+    text-align:center;
+
+    padding:32px 20px;
+
     border-top:3px solid var(--gold);
 }
-footer strong{color:white}
-footer small{opacity:.75}
 
-/* RESPONSIVO */
+footer strong{
+    color:white;
+}
+
+footer small{
+    opacity:.75;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
 @media(max-width:850px){
-    .hero{min-height:520px}
-    .hero-inner{padding:45px 0}
-    .hero h1{font-size:clamp(38px,11vw,58px)}
-    .map-heading,.reader-top{display:block}
-    .map-heading p{margin-top:12px}
-    .info-grid{grid-template-columns:1fr}
-    #map{height:62vh;min-height:440px}
+
+    .hero{
+        min-height:520px;
+    }
+
+    .hero-inner{
+        padding:45px 0;
+    }
+
+    .hero h1{
+        font-size:
+            clamp(38px,11vw,58px);
+    }
+
+    .map-heading,
+    .reader-top{
+        display:block;
+    }
+
+    .map-heading p{
+        margin-top:12px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    #map{
+        height:62vh;
+        min-height:440px;
+    }
+
 }
+
 @media(max-width:650px){
-    .container{width:min(100% - 22px,1180px)}
-    .hero-sub{font-size:17px}
-    .meta{margin-top:38px}
-    .section{padding:45px 0}
-    .intro-card{padding:23px}
-    #map{height:70vh;min-height:420px;border-width:3px}
-    .book{padding:9px}
-    .book-spread{grid-template-columns:1fr}
-    .book-spread:before{display:none}
-    .page{aspect-ratio:16/9}
-    .page.right{display:none}
-    .reader-controls{gap:8px}
-    .reader-btn{padding:10px 13px}
+
+    .container{
+        width:min(
+            100% - 22px,
+            1180px
+        );
+    }
+
+    .hero-sub{
+        font-size:17px;
+    }
+
+    .meta{
+        margin-top:38px;
+    }
+
+    .section{
+        padding:45px 0;
+    }
+
+    .intro-card{
+        padding:23px;
+    }
+
+    #map{
+        height:70vh;
+        min-height:420px;
+        border-width:3px;
+    }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     CAPA
+===================================================== -->
+
 <header class="hero">
+
     <div class="container hero-inner">
-        <div class="eyebrow">História da África</div>
-        <h1>Povos e Sociedades<br>iorubás na África Ocidental</h1>
-        <div class="gold-rule"></div>
-        <p class="hero-sub">História, cultura, identidade e diversidade</p>
-        <div class="meta">
-            <div><span class="meta-icon">●</span><span>Eduardo da Silva Ferreira</span></div>
-            <div><span class="meta-icon">▣</span><span>História da África</span></div>
-            <div><span class="meta-icon">◆</span><span>Prof. Washington Nascimento</span></div>
+
+        <div class="eyebrow">
+            História da África
         </div>
+
+        <h1>
+            Povos e Sociedades<br>
+            iorubás na África Ocidental
+        </h1>
+
+        <div class="gold-rule"></div>
+
+        <p class="hero-sub">
+            História, cultura, identidade e diversidade
+        </p>
+
+        <div class="meta">
+
+            <div>
+                <span class="meta-icon">●</span>
+                <span>Eduardo da Silva Ferreira</span>
+            </div>
+
+            <div>
+                <span class="meta-icon">▣</span>
+                <span>História da África</span>
+            </div>
+
+            <div>
+                <span class="meta-icon">◆</span>
+                <span>Prof. Washington Nascimento</span>
+            </div>
+
+        </div>
+
     </div>
+
 </header>
 
+
+
 <main>
+
+
+<!-- =====================================================
+     APRESENTAÇÃO
+===================================================== -->
+
 <section class="section">
+
     <div class="container">
-        <div class="section-kicker">Apresentação</div>
-        <h2 class="section-title">Música e cultura iorubá</h2>
-        <div class="intro-card">
-            <p>A música ocupa um papel importante nas sociedades iorubás, estando presente em cerimônias, celebrações, práticas religiosas, acontecimentos políticos e diferentes momentos da vida comunitária.</p>
-            <p>Explore primeiro o mapa musical para conhecer alguns instrumentos associados a essas tradições. Em seguida, leia a apresentação completa no livro digital abaixo.</p>
+
+        <div class="section-kicker">
+            Apresentação
         </div>
+
+        <h2 class="section-title">
+            Música e cultura iorubá
+        </h2>
+
+        <div class="intro-card">
+
+            <p>
+                A música ocupa um papel importante nas sociedades iorubás,
+                estando presente em cerimônias, celebrações, práticas
+                religiosas, acontecimentos políticos e diferentes momentos
+                da vida comunitária.
+            </p>
+
+            <p>
+                Explore primeiro o mapa musical para conhecer alguns
+                instrumentos associados a essas tradições. Em seguida,
+                abra a apresentação completa para consultar o conteúdo
+                em PDF e utilizar o leitor de acessibilidade.
+            </p>
+
+        </div>
+
     </div>
+
 </section>
+
+
+
+<!-- =====================================================
+     MAPA
+===================================================== -->
 
 <section class="map-section">
+
     <div class="container">
+
         <div class="map-heading">
+
             <div>
-                <div class="section-kicker">Território</div>
-                <h2 class="section-title">Mapa musical dos povos iorubás</h2>
+
+                <div class="section-kicker">
+                    Território
+                </div>
+
+                <h2 class="section-title">
+                    Mapa musical dos povos iorubás
+                </h2>
+
             </div>
-            <p>O mapa relaciona instrumentos e manifestações musicais a espaços da África Ocidental ligados historicamente às culturas iorubás.</p>
+
+            <p>
+                O mapa relaciona instrumentos e manifestações musicais
+                a espaços da África Ocidental ligados historicamente
+                às culturas iorubás.
+            </p>
+
         </div>
 
-        <div class="instruction"><strong>🗺️ Explore o mapa:</strong> clique nos símbolos dos instrumentos para conhecer sua história e ouvir seu som.</div>
+
+        <div class="instruction">
+
+            <strong>
+                🗺️ Explore o mapa:
+            </strong>
+
+            clique nos símbolos dos instrumentos
+            para conhecer sua história e ouvir seu som.
+
+        </div>
+
+
         <div id="map"></div>
+
     </div>
+
 </section>
 
-<section class="reader-section" id="apresentacao">
+
+
+<!-- =====================================================
+     APRESENTAÇÃO / LEITOR DE ACESSIBILIDADE
+===================================================== -->
+
+<section
+    class="reader-section"
+    id="apresentacao"
+>
+
     <div class="container">
+
         <div class="reader-top">
+
             <div>
-                <div class="reader-badge">Leitura completa · 19 páginas</div>
-                <h2 class="section-title">Leia a apresentação</h2>
-                <p class="section-intro">A apresentação usada no trabalho foi transformada em um livro digital. Use os botões para avançar e voltar pelas páginas.</p>
+
+                <div class="reader-badge">
+                    Apresentação completa · 19 páginas
+                </div>
+
+                <h2 class="section-title">
+                    Leia a apresentação
+                </h2>
+
+                <p class="section-intro">
+                    A apresentação usada no trabalho está disponível
+                    em PDF. Abra o documento em uma nova página para
+                    visualizar o conteúdo e utilizar o leitor de
+                    acessibilidade com reconhecimento de texto.
+                </p>
+
+
+                <a
+                    href="./leitor.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="pdf-accessibility-link"
+                >
+                    📖 Abrir o PDF completo com leitor de acessibilidade ↗
+                </a>
+
             </div>
+
         </div>
 
-        <div class="book-wrap">
-            <div class="book">
-                <div class="book-spread">
-                    <div class="page" id="pageLeft"><canvas id="canvasLeft"></canvas><span class="page-number" id="numberLeft">1</span></div>
-                    <div class="page right" id="pageRight"><canvas id="canvasRight"></canvas><span class="page-number" id="numberRight">2</span></div>
-                </div>
-                <div class="reader-controls">
-                    <button class="reader-btn" id="prevBtn" type="button">← Anterior</button>
-                    <div class="page-count" id="pageCount">Páginas 1–2 de 19</div>
-                    <button class="reader-btn" id="nextBtn" type="button">Próxima →</button>
-                    <button class="reader-btn expand-btn" id="expandBtn" type="button" aria-label="Ampliar apresentação">⛶ Ampliar</button>
-                </div>
-                <p class="pdf-note">O leitor utiliza o PDF original desta apresentação.
-                    <br><a class="pdf-download" href="./Yoruba-Presentation.pdf" target="_blank" rel="noopener">Abrir o PDF completo em outra aba ↗</a>
-                </p>
-            </div>
-        </div>
     </div>
+
 </section>
+
+
+
+<!-- =====================================================
+     CARDS
+===================================================== -->
 
 <section class="info-section">
+
     <div class="container">
-        <div class="section-kicker">Explore as tradições</div>
-        <h2 class="section-title">Arte, memória, território e música</h2>
-        <p class="section-intro">O conteúdo da apresentação aborda a diversidade política e cultural das sociedades iorubás, a construção histórica da identidade iorubá e a relação entre arte, religiosidade, ancestralidade e música.</p>
+
+        <div class="section-kicker">
+            Explore as tradições
+        </div>
+
+        <h2 class="section-title">
+            Arte, memória, território e música
+        </h2>
+
+        <p class="section-intro">
+            O conteúdo da apresentação aborda a diversidade política
+            e cultural das sociedades iorubás, a construção histórica
+            da identidade iorubá e a relação entre arte, religiosidade,
+            ancestralidade e música.
+        </p>
+
 
         <div class="info-grid">
+
+
             <article class="info-card">
-                <div class="icon">🥁</div>
-                <h3>Instrumentos</h3>
-                <p>Dùndún, Bàtá, Àgógô, Gàngán e Ṣẹ̀kẹ̀rẹ̀ aparecem no mapa como pontos de entrada para as tradições musicais.</p>
+
+                <div class="icon">
+                    🥁
+                </div>
+
+                <h3>
+                    Instrumentos
+                </h3>
+
+                <p>
+                    Dùndún, Bàtá, Àgógô, Gàngán e Ṣẹ̀kẹ̀rẹ̀ aparecem
+                    no mapa como pontos de entrada para as tradições
+                    musicais.
+                </p>
+
             </article>
+
+
             <article class="info-card">
-                <div class="icon">🌍</div>
-                <h3>Território</h3>
-                <p>A apresentação localiza historicamente a maior concentração iorubá no sudoeste da atual Nigéria, com extensões no Benim e no Togo.</p>
+
+                <div class="icon">
+                    🌍
+                </div>
+
+                <h3>
+                    Território
+                </h3>
+
+                <p>
+                    A apresentação localiza historicamente a maior
+                    concentração iorubá no sudoeste da atual Nigéria,
+                    com extensões no Benim e no Togo.
+                </p>
+
             </article>
+
+
             <article class="info-card">
-                <div class="icon">📖</div>
-                <h3>História e identidade</h3>
-                <p>O trabalho destaca a diversidade entre diferentes sociedades e discute a construção de uma identidade iorubá comum entre o final do século XVIII e o século XIX.</p>
+
+                <div class="icon">
+                    📖
+                </div>
+
+                <h3>
+                    História e identidade
+                </h3>
+
+                <p>
+                    O trabalho destaca a diversidade entre diferentes
+                    sociedades e discute a construção de uma identidade
+                    iorubá comum entre o final do século XVIII e o
+                    século XIX.
+                </p>
+
             </article>
+
+
         </div>
+
     </div>
+
 </section>
+
+
+
+<!-- =====================================================
+     CONCLUSÃO
+===================================================== -->
 
 <section class="section">
+
     <div class="container">
-        <div class="section-kicker">Conclusão</div>
-        <h2 class="section-title">Uma história diversa e dinâmica</h2>
-        <div class="conclusion">
-            <p>Estudar as sociedades iorubás permite compreender a diversidade e a complexidade da África Ocidental antes da colonização europeia.</p>
-            <p>Mais do que uma única civilização politicamente unificada, existiam diversas cidades, reinos e comunidades, que compartilhavam elementos culturais, linguísticos, religiosos e tradições de origem comum.</p>
-            <p>Ilé-Ifé teve grande importância religiosa e simbólica, enquanto Oyo alcançou forte influência política e econômica. Ao mesmo tempo, diferentes sociedades preservaram suas próprias identidades e formas de organização.</p>
-            <p>A partir do final do século XVIII e principalmente durante o século XIX, essas características compartilhadas contribuíram para a construção de uma identidade coletiva que passou a ser reconhecida pelo termo “iorubá”.</p>
-            <p>Compreender esse processo também ajuda a perceber que as culturas africanas não eram estáticas nem homogêneas: elas eram diversas, dinâmicas e historicamente construídas.</p>
+
+        <div class="section-kicker">
+            Conclusão
         </div>
+
+        <h2 class="section-title">
+            Uma história diversa e dinâmica
+        </h2>
+
+
+        <div class="conclusion">
+
+            <p>
+                Estudar as sociedades iorubás permite compreender
+                a diversidade e a complexidade da África Ocidental
+                antes da colonização europeia.
+            </p>
+
+            <p>
+                Mais do que uma única civilização politicamente
+                unificada, existiam diversas cidades, reinos e
+                comunidades, que compartilhavam elementos culturais,
+                linguísticos, religiosos e tradições de origem comum.
+            </p>
+
+            <p>
+                Ilé-Ifé teve grande importância religiosa e simbólica,
+                enquanto Oyo alcançou forte influência política e
+                econômica. Ao mesmo tempo, diferentes sociedades
+                preservaram suas próprias identidades e formas
+                de organização.
+            </p>
+
+            <p>
+                A partir do final do século XVIII e principalmente
+                durante o século XIX, essas características
+                compartilhadas contribuíram para a construção de
+                uma identidade coletiva que passou a ser reconhecida
+                pelo termo “iorubá”.
+            </p>
+
+            <p>
+                Compreender esse processo também ajuda a perceber
+                que as culturas africanas não eram estáticas nem
+                homogêneas: elas eram diversas, dinâmicas e
+                historicamente construídas.
+            </p>
+
+        </div>
+
     </div>
+
 </section>
 
-<section class="section" style="padding-top:0">
+
+
+<!-- =====================================================
+     REFERÊNCIAS
+===================================================== -->
+
+<section
+    class="section"
+    style="padding-top:0"
+>
+
     <div class="container references">
-        <div class="section-kicker">Referências da apresentação</div>
-        <h2 class="section-title" style="font-size:32px">Bibliografia</h2>
-        <p><strong>OLIVA, Anderson Ribeiro.</strong> A invenção dos iorubás na África Ocidental: reflexões e apontamentos acerca do papel da história e da tradição oral na construção da identidade étnica. Estudos Afro-Asiáticos, Rio de Janeiro, 2005.</p>
-        <p><strong>CAMPBELL, Bolaji.</strong> Cloth as metaphor in Egungun costumes. Providence: RISD Museum, 2016.</p>
-        <p><strong>RODRIGUES, Renato.</strong> Ancestrais que vieram da África: o culto a Egúnguin no Candomblé Omo Ilé Agboulá. 2021.</p>
-        <p><strong>APELEY, Alice.</strong> Ífe Terracottas (1000–1400 A.D.). In: The Metropolitan Museum of Art, 2001.</p>
+
+        <div class="section-kicker">
+            Referências da apresentação
+        </div>
+
+        <h2
+            class="section-title"
+            style="font-size:32px"
+        >
+            Bibliografia
+        </h2>
+
+        <p>
+            <strong>
+                OLIVA, Anderson Ribeiro.
+            </strong>
+            A invenção dos iorubás na África Ocidental:
+            reflexões e apontamentos acerca do papel da história
+            e da tradição oral na construção da identidade étnica.
+            Estudos Afro-Asiáticos, Rio de Janeiro, 2005.
+        </p>
+
+        <p>
+            <strong>
+                CAMPBELL, Bolaji.
+            </strong>
+            Cloth as metaphor in Egungun costumes.
+            Providence: RISD Museum, 2016.
+        </p>
+
+        <p>
+            <strong>
+                RODRIGUES, Renato.
+            </strong>
+            Ancestrais que vieram da África:
+            o culto a Egúnguin no Candomblé Omo Ilé Agboulá. 2021.
+        </p>
+
+        <p>
+            <strong>
+                APELEY, Alice.
+            </strong>
+            Ífe Terracottas (1000–1400 A.D.).
+            In: The Metropolitan Museum of Art, 2001.
+        </p>
+
     </div>
+
 </section>
+
+
 </main>
 
+
+
+<!-- =====================================================
+     RODAPÉ
+===================================================== -->
+
 <footer>
-    <p><strong>Mapa Musical dos Povos Iorubás</strong></p>
-    <p>Material didático — História da África</p>
-    <small>Eduardo da Silva Ferreira</small>
+
+    <p>
+        <strong>
+            Mapa Musical dos Povos Iorubás
+        </strong>
+    </p>
+
+    <p>
+        Material didático — História da África
+    </p>
+
+    <small>
+        Eduardo da Silva Ferreira
+    </small>
+
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-<script>
-// =====================================================
-// LEITOR PDF — LIVRO DIGITAL
-// =====================================================
-const PDF_URL = "./Yoruba-Presentation.pdf";
-const TOTAL_PAGES = 19;
-let currentSpread = 1;
-let pdfDoc = null;
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+<!-- =====================================================
+     LEAFLET
+===================================================== -->
 
-async function renderPage(pageNumber, canvasId, numberId) {
-    const canvas = document.getElementById(canvasId);
-    const number = document.getElementById(numberId);
-    const pageBox = canvas.parentElement;
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin=""
+></script>
 
-    if (pageNumber > TOTAL_PAGES) {
-        canvas.style.display = "none";
-        number.style.display = "none";
-        pageBox.innerHTML = '<div class="page-placeholder">Fim da apresentação</div>';
-        return;
-    }
 
-    canvas.style.display = "block";
-    number.style.display = "block";
-    const oldPlaceholder = pageBox.querySelector(".page-placeholder");
-    if (oldPlaceholder) oldPlaceholder.remove();
-
-    const page = await pdfDoc.getPage(pageNumber);
-    const baseViewport = page.getViewport({scale: 1});
-
-    // O PDF é 16:9; a escala é calculada para preencher a largura da página.
-    const scale = pageBox.clientWidth / baseViewport.width;
-    const viewport = page.getViewport({scale});
-
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.floor(viewport.width * dpr);
-    canvas.height = Math.floor(viewport.height * dpr);
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-
-    const context = canvas.getContext("2d", {alpha:false});
-    context.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    await page.render({
-        canvasContext: context,
-        viewport
-    }).promise;
-
-    number.textContent = pageNumber;
-}
-
-async function renderSpread() {
-    if (!pdfDoc) return;
-
-    await renderPage(currentSpread, "canvasLeft", "numberLeft");
-    await renderPage(currentSpread + 1, "canvasRight", "numberRight");
-
-    document.getElementById("pageCount").textContent =
-        currentSpread + 1 <= TOTAL_PAGES
-            ? `Páginas ${currentSpread}–${currentSpread + 1} de ${TOTAL_PAGES}`
-            : `Página ${currentSpread} de ${TOTAL_PAGES}`;
-
-    document.getElementById("prevBtn").disabled = currentSpread <= 1;
-    document.getElementById("nextBtn").disabled = currentSpread >= TOTAL_PAGES - 1;
-}
-
-document.getElementById("prevBtn").addEventListener("click", async () => {
-    if (currentSpread > 1) {
-        currentSpread -= 2;
-        if (currentSpread < 1) currentSpread = 1;
-        await renderSpread();
-    }
-});
-
-document.getElementById("nextBtn").addEventListener("click", async () => {
-    if (currentSpread < TOTAL_PAGES - 1) {
-        currentSpread += 2;
-        await renderSpread();
-    }
-});
-
-// Ampliar o leitor sem sair da página
-const readerSection = document.querySelector(".reader-section");
-const expandBtn = document.getElementById("expandBtn");
-
-function setPdfExpanded(expanded) {
-    readerSection.classList.toggle("pdf-expanded", expanded);
-    document.body.classList.toggle("pdf-open", expanded);
-    expandBtn.textContent = expanded ? "✕ Fechar" : "⛶ Ampliar";
-    expandBtn.setAttribute("aria-label", expanded ? "Fechar modo ampliado" : "Ampliar apresentação");
-
-    // Dá tempo para o navegador recalcular o tamanho das páginas antes de redesenhar.
-    requestAnimationFrame(() => {
-        if (pdfDoc) renderSpread();
-    });
-}
-
-expandBtn.addEventListener("click", () => {
-    setPdfExpanded(!readerSection.classList.contains("pdf-expanded"));
-});
-
-document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && readerSection.classList.contains("pdf-expanded")) {
-        setPdfExpanded(false);
-    }
-});
-
-window.addEventListener("resize", () => {
-    if (pdfDoc) renderSpread();
-});
-
-pdfjsLib.getDocument(PDF_URL).promise
-    .then(async pdf => {
-        pdfDoc = pdf;
-        await renderSpread();
-    })
-    .catch(error => {
-        console.error("Erro ao carregar o PDF:", error);
-        document.getElementById("pageLeft").innerHTML =
-            '<div class="page-placeholder">Não foi possível carregar o PDF.<br><small>Verifique se o arquivo está no repositório com o nome <b>Yoruba-Presentation.pdf</b>.</small></div>';
-        document.getElementById("pageRight").innerHTML =
-            '<div class="page-placeholder">Coloque o PDF na mesma pasta do index.html.</div>';
-    });
-</script>
 
 <!-- =====================================================
      MAPA MUSICAL
 ===================================================== -->
+
 <script>
 
 /* =====================================================
@@ -620,13 +1146,9 @@ pdfjsLib.getDocument(PDF_URL).promise
 ===================================================== */
 
 const map = L.map("map").setView(
-
     [7.5, 3.5],
-
     6
-
 );
-
 
 
 /* =====================================================
@@ -634,21 +1156,14 @@ const map = L.map("map").setView(
 ===================================================== */
 
 L.tileLayer(
-
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-
     {
-
-        maxZoom:
-            19,
+        maxZoom:19,
 
         attribution:
             '&copy; OpenStreetMap contributors'
-
     }
-
 ).addTo(map);
-
 
 
 /* =====================================================
@@ -657,27 +1172,16 @@ L.tileLayer(
 
 const instrumentos = [
 
-
-    /* =================================================
-       DÙNDÚN
-    ================================================= */
-
     {
-
-        nome:
-            "Oió",
+        nome:"Oió",
 
         instrumento:
             "Dùndún — tambor falante",
 
-        icone:
-            "🥁",
+        icone:"🥁",
 
-        latitude:
-            8.00,
-
-        longitude:
-            3.55,
+        latitude:8.00,
+        longitude:3.55,
 
         imagem:
             "imagens/dundun.jpg",
@@ -686,32 +1190,20 @@ const instrumentos = [
             "Audio/dundun.mp3",
 
         descricao:
-
             "O dùndún é uma família de tambores tradicionalmente utilizada na música iorubá. Alguns desses tambores podem produzir diferentes alturas de som através da pressão exercida sobre suas cordas."
-
     },
 
 
-    /* =================================================
-       BÀTÁ
-    ================================================= */
-
     {
-
-        nome:
-            "Ilê-Ifé",
+        nome:"Ilê-Ifé",
 
         instrumento:
             "Bàtá",
 
-        icone:
-            "🥁",
+        icone:"🥁",
 
-        latitude:
-            7.48,
-
-        longitude:
-            4.56,
+        latitude:7.48,
+        longitude:4.56,
 
         imagem:
             "imagens/bata.jpg",
@@ -720,32 +1212,20 @@ const instrumentos = [
             "Audio/bata.mp3",
 
         descricao:
-
             "Os tambores bàtá possuem grande importância nas tradições musicais e cerimoniais iorubás, formando conjuntos de percussão com diferentes funções rítmicas."
-
     },
 
 
-    /* =================================================
-       ÀGÓGÔ
-    ================================================= */
-
     {
-
-        nome:
-            "Região iorubá",
+        nome:"Região iorubá",
 
         instrumento:
             "Àgógô",
 
-        icone:
-            "🔔",
+        icone:"🔔",
 
-        latitude:
-            7.10,
-
-        longitude:
-            3.90,
+        latitude:7.10,
+        longitude:3.90,
 
         imagem:
             "imagens/agogo.jpg",
@@ -754,32 +1234,20 @@ const instrumentos = [
             "Audio/agogo.mp3",
 
         descricao:
-
             "O àgógô é um instrumento de metal formado por uma ou mais campânulas. Seu som pode funcionar como elemento de marcação rítmica dentro de conjuntos musicais."
-
     },
 
 
-    /* =================================================
-       BENIM
-    ================================================= */
-
     {
-
-        nome:
-            "Região do atual Benim",
+        nome:"Região do atual Benim",
 
         instrumento:
             "Percussão tradicional",
 
-        icone:
-            "🪘",
+        icone:"🪘",
 
-        latitude:
-            7.20,
-
-        longitude:
-            2.60,
+        latitude:7.20,
+        longitude:2.60,
 
         imagem:
             "imagens/benim.jpg",
@@ -788,32 +1256,20 @@ const instrumentos = [
             "Audio/benim.mp3",
 
         descricao:
-
             "A região do atual Benim possui relações históricas com diferentes povos e tradições da África Ocidental. As fronteiras dos Estados atuais não correspondem necessariamente às áreas culturais históricas."
-
     },
 
 
-    /* =================================================
-       GÀNGÁN
-    ================================================= */
-
     {
-
-        nome:
-            "Oió",
+        nome:"Oió",
 
         instrumento:
             "Gàngán — tambor de pressão",
 
-        icone:
-            "🥁",
+        icone:"🥁",
 
-        latitude:
-            8.10,
-
-        longitude:
-            3.40,
+        latitude:8.10,
+        longitude:3.40,
 
         imagem:
             "imagens/gangan.jpg",
@@ -822,32 +1278,20 @@ const instrumentos = [
             "Audio/gangan.mp3",
 
         descricao:
-
             "O gàngán é um tambor de pressão tradicional associado à música iorubá. Possui duas membranas ligadas por cordas e pode produzir diferentes alturas através da pressão aplicada às cordas durante a execução."
-
     },
 
 
-    /* =================================================
-       ṢẸ̀KẸ̀RẸ̀
-    ================================================= */
-
     {
-
-        nome:
-            "Região iorubá",
+        nome:"Região iorubá",
 
         instrumento:
             "Ṣẹ̀kẹ̀rẹ̀ — cabaça de contas",
 
-        icone:
-            "🪇",
+        icone:"🪇",
 
-        latitude:
-            7.60,
-
-        longitude:
-            4.10,
+        latitude:7.60,
+        longitude:4.10,
 
         imagem:
             "imagens/sekere.jpg",
@@ -856,102 +1300,64 @@ const instrumentos = [
             "Audio/sekere.mp3",
 
         descricao:
-
             "O ṣẹ̀kẹ̀rẹ̀ é um instrumento de percussão construído a partir de uma cabaça envolvida por uma rede de contas. É utilizado para produzir padrões rítmicos através de movimentos e golpes sobre a cabaça."
-
     }
 
 ];
-
 
 
 /* =====================================================
    CRIAÇÃO DOS MARCADORES
 ===================================================== */
 
-instrumentos.forEach(function(item) {
-
-
-    /* =================================================
-       ÍCONE PERSONALIZADO
-    ================================================= */
+instrumentos.forEach(function(item){
 
     const icone = L.divIcon({
 
-        className:
-            "",
+        className:"",
 
         html:
-
             `<div class="instrument-marker">
-
                 ${item.icone}
+            </div>`,
 
-             </div>`,
+        iconSize:[44,44],
 
-        iconSize:
-            [44, 44],
+        iconAnchor:[22,22],
 
-        iconAnchor:
-            [22, 22],
-
-        popupAnchor:
-            [0, -22]
+        popupAnchor:[0,-22]
 
     });
 
-
-
-    /* =================================================
-       CONTEÚDO DO POPUP
-    ================================================= */
 
     const conteudo = `
 
         <div class="popup">
 
-
             <img
-
                 src="${item.imagem}"
-
                 alt="${item.instrumento}"
-
                 onerror="
                     this.style.display='none'
                 "
-
             >
 
-
             <h2>
-
                 ${item.nome}
-
             </h2>
 
-
             <h3>
-
                 ${item.icone}
                 ${item.instrumento}
-
             </h3>
 
-
             <p>
-
                 ${item.descricao}
-
             </p>
 
-
             <strong>
-
                 🎧 Ouvir o instrumento:
-
             </strong>
-
 
             <audio
                 controls
@@ -959,11 +1365,8 @@ instrumentos.forEach(function(item) {
             >
 
                 <source
-
                     src="${item.audio}"
-
                     type="audio/mpeg"
-
                 >
 
                 Seu navegador não suporta
@@ -971,54 +1374,29 @@ instrumentos.forEach(function(item) {
 
             </audio>
 
-
         </div>
 
     `;
 
 
-
-    /* =================================================
-       MARCADOR
-    ================================================= */
-
     L.marker(
-
         [
-
             item.latitude,
-
             item.longitude
-
         ],
-
         {
-
-            icon:
-                icone
-
+            icon:icone
         }
-
     )
-
     .addTo(map)
-
     .bindPopup(
-
         conteudo,
-
         {
-
-            maxWidth:
-                330
-
+            maxWidth:330
         }
-
     );
 
-
 });
-
 
 
 /* =====================================================
@@ -1027,52 +1405,37 @@ instrumentos.forEach(function(item) {
 
 const regiaoIoruba = [
 
-    [9.8, 2.0],
+    [9.8,2.0],
 
-    [9.8, 4.9],
+    [9.8,4.9],
 
-    [8.8, 5.5],
+    [8.8,5.5],
 
-    [6.0, 5.5],
+    [6.0,5.5],
 
-    [5.8, 2.2],
+    [5.8,2.2],
 
-    [7.0, 1.8]
+    [7.0,1.8]
 
 ];
 
 
 L.polygon(
-
     regiaoIoruba,
-
     {
+        color:"#9b5f27",
 
-        color:
-            "#9b5f27",
+        weight:2,
 
-        weight:
-            2,
+        fillOpacity:0.08,
 
-        fillOpacity:
-            0.08,
-
-        dashArray:
-            "7 7"
-
+        dashArray:"7 7"
     }
-
 )
-
 .addTo(map)
-
 .bindTooltip(
-
-    "Área aproximada de referência " +
-    "da região histórica iorubá"
-
+    "Área aproximada de referência da região histórica iorubá"
 );
-
 
 
 /* =====================================================
@@ -1081,33 +1444,24 @@ L.polygon(
 
 const legenda =
     L.control({
-
-        position:
-            "bottomright"
-
+        position:"bottomright"
     });
 
 
 legenda.onAdd =
-function() {
-
+function(){
 
     const div =
         L.DomUtil.create(
-
             "div",
-
             "legend"
-
         );
 
 
     div.innerHTML = `
 
         <div class="legend-title">
-
             🎵 Instrumentos
-
         </div>
 
         🥁 Tambores
@@ -1135,5 +1489,7 @@ function() {
 legenda.addTo(map);
 
 </script>
+
+
 </body>
 </html>
